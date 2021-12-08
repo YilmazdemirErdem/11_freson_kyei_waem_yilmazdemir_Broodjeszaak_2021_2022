@@ -28,3 +28,4 @@ public class AdminMainPane extends BorderPane {
         this.setCenter(tabPane);
     }
 }
+
