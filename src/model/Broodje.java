@@ -1,0 +1,50 @@
+package model;
+
+/**
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson
+ */
+
+public class Broodje {
+    private String broodjesNaam;
+    private double broodjesPrijs;
+    private int broodjesStock, aantalBroosjesVerkocht;
+
+    public Broodje(String broodjesNaam, double broodjesPrijs, int broodjesStock, int aantalBroosjesVerkocht){
+        setBroodjesNaam(broodjesNaam);
+        setBroodjesPrijs(broodjesPrijs);
+        setBroodjesStock(broodjesStock);
+        setAantalBroosjesVerkocht(aantalBroosjesVerkocht);
+    }
+
+    public void setBroodjesNaam(String broodjesNaam) {
+        this.broodjesNaam = broodjesNaam;
+    }
+
+    public void setBroodjesPrijs(double broodjesPrijs) {
+        this.broodjesPrijs = broodjesPrijs;
+    }
+
+    public void setBroodjesStock(int broodjesStock) {
+        this.broodjesStock = broodjesStock;
+    }
+
+    public void setAantalBroosjesVerkocht(int aantalBroosjesVerkocht) {
+        this.aantalBroosjesVerkocht = aantalBroosjesVerkocht;
+    }
+
+    public String getBroodjesNaam() {
+        return broodjesNaam;
+    }
+
+    public double getBroodjesPrijs() {
+        return broodjesPrijs;
+    }
+
+    public int getBroodjesStock() {
+        return broodjesStock;
+    }
+
+    public int getAantalBroosjesVerkocht() {
+        return aantalBroosjesVerkocht;
+    }
+}
