@@ -6,7 +6,7 @@ import model.database.BroodjesDatabase;
 import view.BroodjesView;
 
 /**
- * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, lol
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson
  */
 
 public class SandwichOverviewPane extends GridPane{

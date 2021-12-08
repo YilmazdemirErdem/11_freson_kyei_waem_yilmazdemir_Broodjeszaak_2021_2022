@@ -16,12 +16,10 @@ public class AdminMainPane extends BorderPane {
         BroodjesDatabase broodjesDatabase = new BroodjesDatabase();
 
         TabPane tabPane = new TabPane();
-        //Tab spelVerloopTab = new Tab("Spelverloop");
         SandwichOverviewPane sandwichOverviewPane = new SandwichOverviewPane(broodjesDatabase);
         Tab broodjesTab = new Tab("Broodjes/Beleg",sandwichOverviewPane);
         Tab instellingTab = new Tab("Instellingen");
         Tab statistiekTab = new Tab("Statistieken");
-        //tabPane.getTabs().add(spelVerloopTab);
         tabPane.getTabs().add(broodjesTab);
         tabPane.getTabs().add(statistiekTab);
         tabPane.getTabs().add(instellingTab);
