@@ -3,7 +3,10 @@ package model.database;
 import model.Broodje;
 import model.database.loadSaveStrategies.LoadSaveStrategy;
 import model.database.loadSaveStrategies.LoadSaveStrategyEnum;
+import model.database.loadSaveStrategies.LoadSaveStrategyFactory;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -11,39 +14,22 @@ import java.util.*;
  */
 
 public class BroodjesDatabase {
-    private TreeMap<String, Broodje> broodjesMap;
+    private TreeMap broodjesMap;
 
-    public BroodjesDatabase(LoadSaveStrategyEnum loadSaveStrategyEnum){
+    public BroodjesDatabase(LoadSaveStrategyEnum loadSaveStrategyEnum) {
         setBroodjesMap(loadSaveStrategyEnum);
     }
 
     public void setBroodjesMap(LoadSaveStrategyEnum loadSaveStrategyEnum) {
-        this.broodjesMap = LoadSaveStrategy.load(loadSaveStrategyEnum);
+        File file = new File("src/bestanden/broodjes.txt");
+        File file2 = new File("src/bestanden/broodjes.xls");
+        LoadSaveStrategyFactory loadSaveStrategyFactory = new LoadSaveStrategyFactory();
+        if (loadSaveStrategyEnum == LoadSaveStrategyEnum.EXCEL){
+            this.broodjesMap = loadSaveStrategyFactory.createBroodjesLoadSaveStrategy(loadSaveStrategyEnum).load(file2);
+        } else {
+            this.broodjesMap = loadSaveStrategyFactory.createBroodjesLoadSaveStrategy(loadSaveStrategyEnum).load(file);
+        }
     }
-
-    /*public TreeMap<String, Broodje> load(){
-        TreeMap<String, Broodje>broodjesMap = new TreeMap<String, Broodje>();
-        File broodjesFile = new File("src/bestanden/broodjes.txt");
-        try {
-            Scanner scannerFile = new Scanner(broodjesFile);
-            while (scannerFile.hasNextLine()) {
-                String s = scannerFile.nextLine();
-                String[] delen = s.split(",");
-                String broodjesNaam = delen[0];
-                double broodjesPrijs = Double.parseDouble(delen[1]);
-                int broodjeStock = Integer.parseInt(delen[2]);
-                int aantalBroosjesVerkocht = Integer.parseInt(delen[3]);
-                Broodje broodje = new Broodje(broodjesNaam, broodjesPrijs, broodjeStock, aantalBroosjesVerkocht);
-                broodjesMap.put(broodjesNaam, broodje);
-            }
-        }  catch (FileNotFoundException ex) {
-            System.out.println("fout bij inlezen");
-        }
-        catch(NumberFormatException e){
-            System.out.println("data niet numeriek");
-        }
-        return broodjesMap;
-    }*/
 
     public void save(){
 

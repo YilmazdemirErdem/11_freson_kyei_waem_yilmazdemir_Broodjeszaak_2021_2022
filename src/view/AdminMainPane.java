@@ -5,15 +5,20 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import model.database.BroodjesDatabase;
+import model.database.loadSaveStrategies.LoadSaveStrategy;
+import model.database.loadSaveStrategies.LoadSaveStrategyEnum;
 import view.panels.BroodjesOverviewPane;
+
+import java.io.IOException;
 
 /**
  * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson
  */
 
 public class AdminMainPane extends BorderPane {
-    public AdminMainPane(){
-        BroodjesDatabase broodjesDatabase = new BroodjesDatabase();
+
+    public AdminMainPane() {
+        BroodjesDatabase broodjesDatabase = new BroodjesDatabase(LoadSaveStrategyEnum.EXCEL);
 
         TabPane tabPane = new TabPane();
         BroodjesOverviewPane broodjesOverviewPane = new BroodjesOverviewPane(broodjesDatabase);
