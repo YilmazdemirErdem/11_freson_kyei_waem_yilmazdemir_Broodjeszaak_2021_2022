@@ -2,41 +2,35 @@ package model.database;
 
 import model.BelegSoort;
 import model.Broodje;
+import model.database.loadSaveStrategies.LoadSaveStrategyEnum;
+import model.database.loadSaveStrategies.LoadSaveStrategyFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.TreeMap;
 
 public class BelegDatabase {
+    private TreeMap belegMap;
 
-    private TreeMap<String, BelegSoort> belegSoortMap;
-
-    public BelegDatabase (){
-        // this.belegSoortMap =
+    public BelegDatabase(LoadSaveStrategyEnum loadSaveStrategyEnum) {
+        setBelegMap(loadSaveStrategyEnum);
     }
 
-    public TreeMap<String, BelegSoort> load(){
-        TreeMap<String, BelegSoort> belegSoortMap = new TreeMap<String, BelegSoort>();
-        File belegSoortFile = new File("src/bestanden/beleg.txt");
-        try {
-            Scanner scannerFile = new Scanner(belegSoortFile);
-            while (scannerFile.hasNextLine()) {
-                String s = scannerFile.nextLine();
-                String[] delen = s.split(",");
-                String belegNaam = delen[0];
-                double belegPrijs = Double.parseDouble(delen[1]);
-                int belegStock = Integer.parseInt(delen[2]);
-                int aantalBelegVerkocht = Integer.parseInt(delen[3]);
-                BelegSoort belegSoort = new BelegSoort(belegNaam, belegPrijs, belegStock, aantalBelegVerkocht);
-                belegSoortMap.put(belegNaam, belegSoort);
-            }
-        }  catch (FileNotFoundException ex) {
-            System.out.println("fout bij inlezen");
+    public void setBelegMap(LoadSaveStrategyEnum loadSaveStrategyEnum) {
+        File file = new File("src/bestanden/beleg.txt");
+        File file2 = new File("src/bestanden/beleg.xls");
+        LoadSaveStrategyFactory loadSaveStrategyFactory = new LoadSaveStrategyFactory();
+        if (loadSaveStrategyEnum == LoadSaveStrategyEnum.EXCEL){
+            this.belegMap = loadSaveStrategyFactory.createBelegSoortLoadSaveStrategy(loadSaveStrategyEnum).load(file2);
+        } else {
+            this.belegMap = loadSaveStrategyFactory.createBelegSoortLoadSaveStrategy(loadSaveStrategyEnum).load(file);
         }
-        catch(NumberFormatException e){
-            System.out.println("data niet numeriek");
-        }
-        return belegSoortMap;
+    }
+
+    public List<BelegSoort> belegSoortMapToList(){
+        return new ArrayList<>(this.belegMap.values());
     }
 }

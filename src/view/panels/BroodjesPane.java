@@ -17,11 +17,11 @@ import model.database.BroodjesDatabase;
  * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson
  */
 
-public class BroodjesView extends GridPane {
+public class BroodjesPane extends GridPane {
     private TableView<Broodje> table;
     private ObservableList<Broodje> broodjes;
 
-    public BroodjesView(BroodjesDatabase broodjesDatabase){
+    public BroodjesPane(BroodjesDatabase broodjesDatabase){
         VBox root = new VBox();
         root.setSpacing(10);
         root.setPadding(new Insets(10, 10, 10, 10));
