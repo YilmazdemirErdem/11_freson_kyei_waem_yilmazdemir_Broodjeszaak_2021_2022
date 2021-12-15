@@ -1,27 +1,17 @@
-package model.database;
+package model.database.loadSaveStrategies;
 
 import model.Broodje;
-import model.database.loadSaveStrategies.LoadSaveStrategy;
-import model.database.loadSaveStrategies.LoadSaveStrategyEnum;
+import utilities.TesktLoadSaveTemplate;
 
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.util.TreeMap;
 
-/**
- * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson
- */
+public class BroodjesTekstLoadSaveStrategy extends TesktLoadSaveTemplate implements LoadSaveStrategy {
 
-public class BroodjesDatabase {
-    private TreeMap<String, Broodje> broodjesMap;
-
-    public BroodjesDatabase(LoadSaveStrategyEnum loadSaveStrategyEnum){
-        setBroodjesMap(loadSaveStrategyEnum);
-    }
-
-    public void setBroodjesMap(LoadSaveStrategyEnum loadSaveStrategyEnum) {
-        this.broodjesMap = LoadSaveStrategy.load(loadSaveStrategyEnum);
-    }
-
-    /*public TreeMap<String, Broodje> load(){
+    @Override
+    public TreeMap<String, Broodje> load(){
         TreeMap<String, Broodje>broodjesMap = new TreeMap<String, Broodje>();
         File broodjesFile = new File("src/bestanden/broodjes.txt");
         try {
@@ -43,13 +33,10 @@ public class BroodjesDatabase {
             System.out.println("data niet numeriek");
         }
         return broodjesMap;
-    }*/
-
-    public void save(){
-
     }
 
-    public List<Broodje> broodjesMapToList(){
-        return new ArrayList<>(this.broodjesMap.values());
+    @Override
+    public void save() {
+
     }
 }

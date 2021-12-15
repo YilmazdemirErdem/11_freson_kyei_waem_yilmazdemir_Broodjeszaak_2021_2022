@@ -5,10 +5,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class OrderView {
+public class BestelView {
     private Stage stage = new Stage();
 
-    public OrderView(){
+    public BestelView(){
         stage.setTitle("ORDER VIEW");
         stage.initStyle(StageStyle.UTILITY);
         stage.setX(20);

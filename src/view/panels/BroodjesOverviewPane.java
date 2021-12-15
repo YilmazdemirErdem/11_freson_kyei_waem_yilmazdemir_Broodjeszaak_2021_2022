@@ -3,15 +3,14 @@ package view.panels;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import model.database.BroodjesDatabase;
-import view.BroodjesView;
 
 /**
  * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson
  */
 
-public class SandwichOverviewPane extends GridPane{
+public class BroodjesOverviewPane extends GridPane{
 
-    public SandwichOverviewPane(BroodjesDatabase broodjesDatabase) {
+    public BroodjesOverviewPane(BroodjesDatabase broodjesDatabase) {
         this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
         this.setHgap(5);

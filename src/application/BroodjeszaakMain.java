@@ -4,14 +4,14 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import view.AdminView;
 import view.KitchenView;
-import view.OrderView;
+import view.BestelView;
 
 
 public class BroodjeszaakMain extends Application {
     @Override
     public void start(Stage primaryStage) {
         AdminView adminView = new AdminView();
-        OrderView orderView = new OrderView();
+        BestelView bestelView = new BestelView();
         KitchenView kitchenView = new KitchenView();
     }
 
