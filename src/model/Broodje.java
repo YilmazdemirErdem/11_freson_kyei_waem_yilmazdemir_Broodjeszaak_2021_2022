@@ -9,6 +9,8 @@ public class Broodje {
     private double broodjesPrijs;
     private int broodjesStock, aantalBroodjesVerkocht;
 
+    public Broodje(){}
+
     public Broodje(String broodjesNaam, double broodjesPrijs, int broodjesStock, int aantalBroodjesVerkocht){
         setBroodjesNaam(broodjesNaam);
         setBroodjesPrijs(broodjesPrijs);
@@ -46,5 +48,9 @@ public class Broodje {
 
     public int getAantalBroodjesVerkocht() {
         return aantalBroodjesVerkocht;
+    }
+
+    public void aanpassenVoorraad(int aantal){
+        setBroodjesStock(this.broodjesStock - aantal);
     }
 }

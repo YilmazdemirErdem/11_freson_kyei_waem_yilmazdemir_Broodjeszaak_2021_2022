@@ -31,11 +31,11 @@ public class BroodjesDatabase {
         }
     }
 
-    public void save(){
-
-    }
-
     public List<Broodje> broodjesMapToList(){
         return new ArrayList<>(this.broodjesMap.values());
+    }
+
+    public Broodje getBroodje(String broodjesNaam) {
+        return (Broodje) this.broodjesMap.get(broodjesNaam);
     }
 }

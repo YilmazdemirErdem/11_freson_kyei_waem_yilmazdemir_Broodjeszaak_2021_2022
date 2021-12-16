@@ -1,40 +1,49 @@
 package view;
 
-import javafx.geometry.*;
+import controller.BestelViewController;
 import javafx.geometry.Insets;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 
 public class BestelView {
     private Stage stage = new Stage();
+    private Label aantal_bestellingen = new Label("Volgnr: 1");
+    private Label aantal_broodjes = new Label("Aantal Broodjes: 0");
 
-    public BestelView(){
+    public BestelView(BestelViewController controller){
         stage.setTitle("ORDER VIEW");
         stage.initStyle(StageStyle.UTILITY);
         stage.setX(20);
         stage.setY(20);
-        Pane root = createNodeHierarchy();
+        Pane root = createNodeHierarchy(controller);
         Scene scene = new Scene(root, 650, 650);
         stage.setScene(scene);
         stage.sizeToScene();
         stage.show();
+        controller.setView(this);
     }
 
-    private Pane createNodeHierarchy() {
+    public void setLabelAantalBestellingen(String s) {
+        aantal_bestellingen.setText(s);
+    }
+
+    public void setLabelAantalBroodjes(String s){
+        aantal_broodjes.setText(s);
+    }
+
+    private Pane createNodeHierarchy(BestelViewController controller) {
 
         HBox one_one = new HBox(8);
         Button nieuwe_bestelling_button = new Button("Nieuwe Bestelling");
-        Label volgnr = new Label("volgnr:");
-        one_one.getChildren().addAll(nieuwe_bestelling_button, volgnr);
+        one_one.getChildren().addAll(nieuwe_bestelling_button, aantal_bestellingen);
 
         HBox one = new HBox(8);
-        one.setSpacing(400);
+        one.setSpacing(350);
         ChoiceBox<String> kortingKeuze = new ChoiceBox<>();
         kortingKeuze.getItems().addAll("keuze 1", "keuze 2", "keuze 3");
         one.getChildren().addAll(one_one, kortingKeuze);
@@ -44,6 +53,7 @@ public class BestelView {
         Button volkoren_button = new Button("volkoren");
         Button wit_button = new Button("wit");
         two_one.getChildren().addAll(mais_button, volkoren_button, wit_button);
+        mais_button.setOnAction(event -> controller.maisButtonPressed());
 
         HBox two_two = new HBox(8);
         Button feta_button = new Button("feta");
@@ -61,7 +71,6 @@ public class BestelView {
         two.getChildren().addAll(two_one, two_two);
 
         HBox three = new HBox(8);
-        Label aantal_broodjes = new Label("Aantal Broodjes");
         three.getChildren().addAll(aantal_broodjes);
 
         HBox four_one = new HBox(8);
@@ -104,5 +113,9 @@ public class BestelView {
 
         return main;
     }
+
+    public void updateBestelijnen(){};
+
+    public void updateStatusBroodjesKnoppen(){};
 }
 
