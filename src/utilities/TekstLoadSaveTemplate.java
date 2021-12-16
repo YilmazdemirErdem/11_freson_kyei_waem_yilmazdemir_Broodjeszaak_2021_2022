@@ -1,9 +1,7 @@
 package utilities;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.Collection;
 import java.util.TreeMap;
 
 public abstract class TekstLoadSaveTemplate<K,V>{
@@ -25,13 +23,24 @@ public abstract class TekstLoadSaveTemplate<K,V>{
         return returnMap;
     }
 
-    public void save() {
-
+    public void save(File file, TreeMap<K,V> treeMap) {
+        Collection<V> objecten = treeMap.values();
+        String outputLijn = "";
+        try {
+            PrintWriter writer = new PrintWriter(file);
+            for (V object : objecten){
+                outputLijn = maakTekstLijn(object);
+                writer.println(outputLijn);
+            }
+        }
+        catch (IOException exception){
+            System.out.println("fout bij wegschrijven");
+        }
     }
 
     public abstract V maakObject(String[] tokens);
 
     public abstract K getKey(String[] tokens);
 
-
+    public abstract String maakTekstLijn(V object);
 }

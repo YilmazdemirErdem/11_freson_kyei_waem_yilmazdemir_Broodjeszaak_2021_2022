@@ -20,4 +20,13 @@ public class BelegSoortTekstLoadSaveStrategy extends TekstLoadSaveTemplate imple
     public String getKey(String[] tokens){
         return tokens[0];
     }
+
+    @Override
+    public String maakTekstLijn(Object object) {
+        String outputLijn = "";
+        BelegSoort belegSoort = ((BelegSoort) object);
+        outputLijn = belegSoort.getBelegNaam() + "," + belegSoort.getBelegPrijs() + ","
+                + belegSoort.getBelegStock() + "," + belegSoort.getAantalBelegVerkocht();
+        return outputLijn;
+    }
 }

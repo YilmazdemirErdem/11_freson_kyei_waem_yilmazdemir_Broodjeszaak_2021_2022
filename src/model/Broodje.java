@@ -7,13 +7,13 @@ package model;
 public class Broodje {
     private String broodjesNaam;
     private double broodjesPrijs;
-    private int broodjesStock, aantalBroosjesVerkocht;
+    private int broodjesStock, aantalBroodjesVerkocht;
 
-    public Broodje(String broodjesNaam, double broodjesPrijs, int broodjesStock, int aantalBroosjesVerkocht){
+    public Broodje(String broodjesNaam, double broodjesPrijs, int broodjesStock, int aantalBroodjesVerkocht){
         setBroodjesNaam(broodjesNaam);
         setBroodjesPrijs(broodjesPrijs);
         setBroodjesStock(broodjesStock);
-        setAantalBroosjesVerkocht(aantalBroosjesVerkocht);
+        setAantalBroodjesVerkocht(aantalBroodjesVerkocht);
     }
 
     public void setBroodjesNaam(String broodjesNaam) {
@@ -28,8 +28,8 @@ public class Broodje {
         this.broodjesStock = broodjesStock;
     }
 
-    public void setAantalBroosjesVerkocht(int aantalBroosjesVerkocht) {
-        this.aantalBroosjesVerkocht = aantalBroosjesVerkocht;
+    public void setAantalBroodjesVerkocht(int aantalBroodjesVerkocht) {
+        this.aantalBroodjesVerkocht = aantalBroodjesVerkocht;
     }
 
     public String getBroodjesNaam() {
@@ -44,7 +44,7 @@ public class Broodje {
         return broodjesStock;
     }
 
-    public int getAantalBroosjesVerkocht() {
-        return aantalBroosjesVerkocht;
+    public int getAantalBroodjesVerkocht() {
+        return aantalBroodjesVerkocht;
     }
 }

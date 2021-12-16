@@ -21,4 +21,12 @@ public class BroodjesTekstLoadSaveStrategy extends TekstLoadSaveTemplate impleme
         return tokens[0];
     }
 
+    @Override
+    public String maakTekstLijn(Object object) {
+        String outputLijn = "";
+        Broodje broodje = ((Broodje) object);
+        outputLijn = broodje.getBroodjesNaam() + "," + broodje.getBroodjesPrijs() + ","
+                + broodje.getBroodjesStock() + "," + broodje.getAantalBroodjesVerkocht();
+        return outputLijn;
+    }
 }

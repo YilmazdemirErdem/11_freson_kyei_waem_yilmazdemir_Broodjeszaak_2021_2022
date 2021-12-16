@@ -1,10 +1,12 @@
 package model.database.loadSaveStrategies;
 
+import model.BelegSoort;
 import model.Broodje;
 import utilities.ExcelLoadSaveTemplate;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 public class BroodjesExcelLoadSaveStrategy extends ExcelLoadSaveTemplate implements LoadSaveStrategy{
@@ -23,5 +25,16 @@ public class BroodjesExcelLoadSaveStrategy extends ExcelLoadSaveTemplate impleme
     @Override
     public Object getKey(String[] tokens) {
         return tokens[0];
+    }
+
+    @Override
+    public ArrayList<String> maaktTekstLijn(Object object) {
+        ArrayList<String> outputLijn = new ArrayList<>();
+        Broodje broodje = ((Broodje) object);
+        outputLijn.add(broodje.getBroodjesNaam());
+        outputLijn.add(Double.toString(broodje.getBroodjesPrijs()));
+        outputLijn.add(Integer.toString(broodje.getBroodjesStock()));
+        outputLijn.add(Integer.toString(broodje.getAantalBroodjesVerkocht()));
+        return outputLijn;
     }
 }
