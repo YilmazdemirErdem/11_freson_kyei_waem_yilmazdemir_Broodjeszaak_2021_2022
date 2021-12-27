@@ -6,7 +6,6 @@ import utilities.Observer;
 import view.BestelView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class BestelViewController implements Observer {
     private BestelView bestelView;
@@ -16,6 +15,7 @@ public class BestelViewController implements Observer {
         setBestelFacade(bestelFacade);
         bestelFacade.addObserverToEvent(BestellingEvents.IN_WACHT, this);
         bestelFacade.addObserverToEvent(BestellingEvents.IN_BESTELLING, this);
+        bestelFacade.addObserverToEvent(BestellingEvents.AFGESLOTEN, this);
     }
 
     public BestelFacade getBestelFacade() {
@@ -44,13 +44,13 @@ public class BestelViewController implements Observer {
 
     public void nieuweBestellingButtonPressed() {
         //bestelFacade.changeState(BestellingEvents.IN_BESTELLING);
-        bestelFacade.updateBy(BestellingEvents.IN_BESTELLING, 1,0, 0);
+        bestelFacade.updateBy(BestellingEvents.IN_BESTELLING, 1,0);
     }
 
     public void broodjeButtonPressed(Broodje broodje) {
         bestelFacade.toevoegenBroodje(broodje);
         bestelView.updateBestelijnen(this);
-        bestelFacade.updateBy(BestellingEvents.IN_BESTELLING, 0, 1, 0);
+        bestelFacade.updateBy(BestellingEvents.IN_BESTELLING, 0, 1);
     }
 
     public void belegButtonPressed(BelegSoort belegSoort) {
@@ -65,7 +65,7 @@ public class BestelViewController implements Observer {
         }else{
             bestelFacade.toevoegenBeleg(bestellijn, belegSoort);
             bestelView.updateBestelijnen(this);
-            bestelFacade.updateBy(BestellingEvents.IN_BESTELLING, 0, 0, 0);
+            bestelFacade.updateBy(BestellingEvents.IN_BESTELLING, 0, 0);
         }
     }
 
@@ -92,6 +92,7 @@ public class BestelViewController implements Observer {
 
     public void afsluitenBetalingButtonPressed() {
         bestelFacade.berekenTotaalBedrag(bestelView.getkortingsStrategie());
+        bestelFacade.updateBy(BestellingEvents.AFGESLOTEN, 0, 0);
     }
 
     //called by view
@@ -104,6 +105,6 @@ public class BestelViewController implements Observer {
     public void update(int nrBestelling, int aantalBroodjes, double totalePrijs) {
         bestelView.setLabelAantalBestellingen("Volgnr: " + nrBestelling);
         bestelView.setLabelAantalBroodjes("Aantal Broodjes: " + aantalBroodjes);
-        bestelView.setLabelTeBetalen("Te betalen: " + totalePrijs);
+        bestelView.setLabelTeBetalen("Te betalen: " + totalePrijs + "$");
     }
 }

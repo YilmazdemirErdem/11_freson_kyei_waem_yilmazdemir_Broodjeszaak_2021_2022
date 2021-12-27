@@ -74,8 +74,8 @@ public class BestelFacade implements Subject {
         bestelling.verwijderBestellijn(bestellijn);
     }
 
-    public Double berekenTotaalBedrag(String kortingsStrategie) {
-        return bestelling.berekenTotaalBedrag(kortingsStrategie);
+    public void berekenTotaalBedrag(String kortingsStrategie) {
+        totalePrijs = bestelling.berekenTotaalBedrag(kortingsStrategie);
     }
 
     public void notifyObservers(BestellingEvents bestellingEvents, int nrBestelling, int aantalBroodjes, double totalePrijs){
@@ -84,10 +84,9 @@ public class BestelFacade implements Subject {
         }
     }
 
-    public void updateBy(BestellingEvents bestellingEvents, int nr_bestelling_extra, int aantal_broodjes_extra, double totalePrijs_extra){
+    public void updateBy(BestellingEvents bestellingEvents, int nr_bestelling_extra, int aantal_broodjes_extra){
         nr_bestelling += nr_bestelling_extra;
         aantal_broodjes += aantal_broodjes_extra;
-        totalePrijs += totalePrijs_extra;
         notifyObservers(bestellingEvents, nr_bestelling, aantal_broodjes, totalePrijs);
     }
 
