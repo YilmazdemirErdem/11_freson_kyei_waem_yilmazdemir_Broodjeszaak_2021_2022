@@ -159,4 +159,13 @@ public class BestelView {
     public String getkortingsStrategie() {
         return kortingKeuze.getValue();
     }
+
+    public void foutMelding(String header, String content){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning Dialog");
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+
+        alert.showAndWait();
+    }
 }

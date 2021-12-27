@@ -43,6 +43,10 @@ public class Bestelling {
             totalePrijs += bestellijn.getPrijsBestellijn();
         }
 
+        if (kortingsStrategie == null){
+            BigDecimal bd = new BigDecimal(totalePrijs).setScale(2, RoundingMode.HALF_UP);
+            return bd.doubleValue();
+        }
         if (kortingsStrategie.equals("10% korting op ganse bestelling")){
             totalePrijs -= totalePrijs*0.1;
         }else if(kortingsStrategie.equals("Goedkoopste broodje met beleg gratis")){

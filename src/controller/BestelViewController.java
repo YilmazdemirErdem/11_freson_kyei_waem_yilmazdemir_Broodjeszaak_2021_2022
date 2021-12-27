@@ -56,12 +56,7 @@ public class BestelViewController implements Observer {
     public void belegButtonPressed(BelegSoort belegSoort) {
         Bestellijn bestellijn = bestelView.getSelectedBestellijn();
         if(bestellijn == null){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning Dialog");
-            alert.setHeaderText("Onbestaand broodje");
-            alert.setContentText("Je kan geen beleg toevoegen zonder een broodje geselecteerd te hebben!");
-
-            alert.showAndWait();
+            bestelView.foutMelding("Onbestaand broodje", "Je kan geen beleg toevoegen zonder een broodje geselecteerd te hebben!");
         }else{
             bestelFacade.toevoegenBeleg(bestellijn, belegSoort);
             bestelView.updateBestelijnen(this);
@@ -72,22 +67,23 @@ public class BestelViewController implements Observer {
     public void voegZelfdeBroodjeToeButtonPressed() {
         Bestellijn bestellijn = bestelView.getSelectedBestellijn();
         if(bestellijn == null){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning Dialog");
-            alert.setHeaderText("Onbestaande bestellijn");
-            alert.setContentText("Je kan geen bestellijn kopiëren toevoegen zonder een bestellijn geselecteerd te hebben!");
-
-            alert.showAndWait();
+            bestelView.foutMelding("Onbestaande bestellijn", "Je kan geen bestellijn kopiëren of toevoegen zonder een bestellijn geselecteerd te hebben!");
         }else{
             bestelFacade.voegZelfdeToe(bestellijn);
             bestelView.updateBestelijnen(this);
+            bestelFacade.updateBy(BestellingEvents.IN_BESTELLING, 0, 1);
         }
     }
 
     public void VerwijderBroodjeButtonPressed() {
         Bestellijn bestellijn = bestelView.getSelectedBestellijn();
-        bestelFacade.verwijderBestellijn(bestellijn);
-        bestelView.updateBestelijnen(this);
+        if(bestellijn == null){
+            bestelView.foutMelding("Onbestaande bestellijn", "Je kan geen bestellijn verwijderen zonder een bestellijn geselecteerd te hebben!");
+        }else{
+            bestelFacade.verwijderBestellijn(bestellijn);
+            bestelView.updateBestelijnen(this);
+            bestelFacade.updateBy(BestellingEvents.IN_BESTELLING, 0, -1);
+        }
     }
 
     public void afsluitenBetalingButtonPressed() {
