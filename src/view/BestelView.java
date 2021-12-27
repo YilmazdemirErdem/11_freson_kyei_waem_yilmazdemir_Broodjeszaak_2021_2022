@@ -1,6 +1,8 @@
 package view;
 
 import controller.BestelViewController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.*;
 import javafx.scene.control.*;
@@ -10,15 +12,21 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.BelegSoort;
+import model.Bestellijn;
 import model.Broodje;
+import model.database.BroodjesDatabase;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class BestelView {
     private Stage stage = new Stage();
     private Label aantal_bestellingen = new Label("Volgnr: 0");
     private Label aantal_broodjes = new Label("Aantal Broodjes: 0");
+    private TableView bestellijnen;
+    private ObservableList<Bestellijn> observableListBestellijnen;
 
     public BestelView(BestelViewController controller){
         stage.setTitle("ORDER VIEW");
@@ -77,21 +85,15 @@ public class BestelView {
         three.getChildren().addAll(aantal_broodjes);
 
         HBox four_one = new HBox(8);
-        TableView table = new TableView<Broodje>();
-        TableColumn<Broodje, String> colBroodjesNaam = new TableColumn<Broodje, String>("Broodjes");
+        bestellijnen = new TableView();
+        TableColumn<Bestellijn, String> colBroodjesNaam = new TableColumn<Bestellijn, String>("Broodjes");
         colBroodjesNaam.setMinWidth(100);
-        for (Broodje broodje: controller.getLijstBestellijnen().keySet()) {
-            colBroodjesNaam.setCellValueFactory(new PropertyValueFactory<Broodje, String>(broodje.getBroodjesNaam()));
-        }
-        TableColumn<BelegSoort, String> colBelegNaam = new TableColumn<BelegSoort, String>("Beleg");
+        colBroodjesNaam.setCellValueFactory(new PropertyValueFactory<Bestellijn, String>("naamBroodje"));
+        TableColumn<BelegSoort, ArrayList<String>> colBelegNaam = new TableColumn<BelegSoort, ArrayList<String>>("Beleg");
         colBelegNaam.setMinWidth(350);
-        for (ArrayList<BelegSoort> belegSoorten: controller.getLijstBestellijnen().values()) {
-            for (BelegSoort belegSoort: belegSoorten) {
-                colBelegNaam.setCellValueFactory(new PropertyValueFactory<BelegSoort, String>(belegSoort.getBelegNaam()));
-            }
-        }
-        table.getColumns().addAll(colBroodjesNaam,colBelegNaam);
-        four_one.getChildren().addAll(table);
+        colBelegNaam.setCellValueFactory(new PropertyValueFactory<BelegSoort, ArrayList<String>>("namenBeleg"));
+        bestellijnen.getColumns().addAll(colBroodjesNaam,colBelegNaam);
+        four_one.getChildren().addAll(bestellijnen);
 
         VBox four_two_one = new VBox(8);
         four_two_one.setPadding(new Insets(10));
@@ -132,8 +134,16 @@ public class BestelView {
         return main;
     }
 
-    public void updateBestelijnen(){};
+    public void updateBestelijnen(BestelViewController controller){
+        observableListBestellijnen = FXCollections.observableArrayList(controller.getLijstBestellijnen());
+        bestellijnen.setItems(observableListBestellijnen);
+        bestellijnen.refresh();
+    }
 
     public void updateStatusBroodjesKnoppen(){};
-}
 
+    public Bestellijn getSelectedBestellijn() {
+        Bestellijn bestellijn = (Bestellijn) bestellijnen.getSelectionModel().getSelectedItem();
+        return bestellijn;
+    }
+}

@@ -1,17 +1,20 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Bestellijn {
     private String naamBroodje;
     private ArrayList<String> namenBeleg;
     private Broodje broodje;
     private ArrayList<BelegSoort> belegSoorten;
+    private HashMap<Broodje, ArrayList<BelegSoort>> bestellijnen;
 
     public Bestellijn(Broodje broodje) {
         setNaamBroodje(broodje.getBroodjesNaam());
         setBroodje(broodje);
-        broodje.aanpassenVoorraad(1);
+        this.belegSoorten = new ArrayList<>();
+        this.namenBeleg = new ArrayList<>();
     }
 
     public Broodje getBroodje() {
@@ -46,5 +49,8 @@ public class Bestellijn {
         this.namenBeleg = namenBeleg;
     }
 
-
+    public void voegBelegToe(BelegSoort belegSoort){
+        this.belegSoorten.add(belegSoort);
+        this.namenBeleg.add(belegSoort.getBelegNaam());
+    }
 }

@@ -36,11 +36,15 @@ public class BestelFacade implements Subject {
         bestelling.toevoegenBroodje(broodje);
     }
 
+    public void toevoegenBeleg(Bestellijn bestellijn, BelegSoort belegSoort) {
+        bestelling.toevoegenBeleg(bestellijn, belegSoort);
+    }
+
     public void voegBestellijnToe(String broodjesNaam){
 
     }
 
-    public HashMap<Broodje, ArrayList<BelegSoort>> getLijstBestellijnen(){
+    public ArrayList<Bestellijn> getLijstBestellijnen(){
         return bestelling.getBestellijnen();
     }
 

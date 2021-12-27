@@ -1,24 +1,27 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Bestelling {
-    private HashMap<Broodje, ArrayList<BelegSoort>> bestellijnen;
+    private ArrayList<Bestellijn> bestellijnen;
 
     public Bestelling(){
-        bestellijnen = new HashMap<Broodje, ArrayList<BelegSoort>>();
+        bestellijnen = new ArrayList<Bestellijn>();
     }
 
-    public HashMap<Broodje, ArrayList<BelegSoort>> getBestellijnen() {
+    public ArrayList<Bestellijn> getBestellijnen() {
         return bestellijnen;
     }
 
-    public void setBestellijnen(HashMap<Broodje, ArrayList<BelegSoort>> bestellijnen) {
+    public void setBestellijnen(ArrayList<Bestellijn> bestellijnen) {
         this.bestellijnen = bestellijnen;
     }
 
     public void toevoegenBroodje(Broodje broodje){
-        bestellijnen.put(broodje, new ArrayList<BelegSoort>());
+        bestellijnen.add(new Bestellijn(broodje));
+    }
+
+    public void toevoegenBeleg(Bestellijn bestellijn, BelegSoort belegSoort) {
+        bestellijn.voegBelegToe(belegSoort);
     }
 }

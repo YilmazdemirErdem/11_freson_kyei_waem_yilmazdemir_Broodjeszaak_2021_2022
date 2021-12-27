@@ -1,9 +1,6 @@
 package controller;
 
-import model.BelegSoort;
-import model.BestelFacade;
-import model.BestellingEvents;
-import model.Broodje;
+import model.*;
 import utilities.Observer;
 import view.BestelView;
 
@@ -40,7 +37,7 @@ public class BestelViewController implements Observer {
         bestelFacade.toevoegenBroodje(broodje);
     }
 
-    public HashMap<Broodje, ArrayList<BelegSoort>> getLijstBestellijnen(){
+    public ArrayList<Bestellijn> getLijstBestellijnen(){
         return bestelFacade.getLijstBestellijnen();
     }
 
@@ -51,10 +48,14 @@ public class BestelViewController implements Observer {
 
     public void broodjeButtonPressed(Broodje broodje) {
         bestelFacade.toevoegenBroodje(broodje);
+        bestelView.updateBestelijnen(this);
         bestelFacade.updateBy(BestellingEvents.IN_BESTELLING, 0, 1);
     }
 
     public void belegButtonPressed(BelegSoort belegSoort) {
+        Bestellijn bestellijn = bestelView.getSelectedBestellijn();
+        bestelFacade.toevoegenBeleg(bestellijn, belegSoort);
+        bestelView.updateBestelijnen(this);
         bestelFacade.updateBy(BestellingEvents.IN_BESTELLING, 0, 0);
     }
 
