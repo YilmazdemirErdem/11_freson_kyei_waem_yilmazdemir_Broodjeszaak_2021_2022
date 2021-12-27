@@ -11,6 +11,7 @@ import java.util.HashMap;
 public class BestelFacade implements Subject {
     private int nr_bestelling = 0;
     private int aantal_broodjes = 0;
+    private double totalePrijs = 0.0;
     private BestellingState bestellingState;
     private HashMap<BestellingEvents, ArrayList<Observer>> observerMap = new HashMap<>();
     private BroodjesDatabase broodjesDatabase = new BroodjesDatabase(LoadSaveStrategyEnum.TEKST);
@@ -56,16 +57,38 @@ public class BestelFacade implements Subject {
         return belegDatabase.getOpVoorraadLijstBelegSoorten();
     }
 
-    public void notifyObservers(BestellingEvents bestellingEvents, int nrBestelling, int aantalBroodjes){
+    public void voegZelfdeToe(Bestellijn bestellijn) {
+        Broodje broodjeOriginal = bestellijn.getBroodje();
+        Broodje broodje = new Broodje(broodjeOriginal.getBroodjesNaam(), broodjeOriginal.getBroodjesPrijs(),
+                broodjeOriginal.getBroodjesStock(), broodjeOriginal.getAantalBroodjesVerkocht());
+        Bestellijn bestellijnCopy = new Bestellijn(broodje);
+
+        for (BelegSoort belegSoort:bestellijn.getBelegSoort()) {
+            bestellijnCopy.voegBelegToe(belegSoort);
+        }
+
+        bestelling.voegBestellijnToe(bestellijnCopy);
+    }
+
+    public void verwijderBestellijn(Bestellijn bestellijn) {
+        bestelling.verwijderBestellijn(bestellijn);
+    }
+
+    public Double berekenTotaalBedrag(String kortingsStrategie) {
+        return bestelling.berekenTotaalBedrag(kortingsStrategie);
+    }
+
+    public void notifyObservers(BestellingEvents bestellingEvents, int nrBestelling, int aantalBroodjes, double totalePrijs){
         for (Observer obs: observerMap.get(bestellingEvents)){
-            obs.update(nrBestelling, aantalBroodjes);
+            obs.update(nrBestelling, aantalBroodjes, totalePrijs);
         }
     }
 
-    public void updateBy(BestellingEvents bestellingEvents, int nr_bestelling_extra, int aantal_broodjes_extra){
+    public void updateBy(BestellingEvents bestellingEvents, int nr_bestelling_extra, int aantal_broodjes_extra, double totalePrijs_extra){
         nr_bestelling += nr_bestelling_extra;
         aantal_broodjes += aantal_broodjes_extra;
-        notifyObservers(bestellingEvents, nr_bestelling, aantal_broodjes);
+        totalePrijs += totalePrijs_extra;
+        notifyObservers(bestellingEvents, nr_bestelling, aantal_broodjes, totalePrijs);
     }
 
     public void addObserverToEvent(BestellingEvents bestellingEvents, Observer obs){

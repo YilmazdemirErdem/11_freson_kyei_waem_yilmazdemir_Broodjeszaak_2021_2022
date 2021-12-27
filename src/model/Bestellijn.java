@@ -53,4 +53,12 @@ public class Bestellijn {
         this.belegSoorten.add(belegSoort);
         this.namenBeleg.add(belegSoort.getBelegNaam());
     }
+
+    public double getPrijsBestellijn(){
+        double totalePrijs = this.broodje.getBroodjesPrijs();
+        for (BelegSoort belegSoort:belegSoorten) {
+            totalePrijs += belegSoort.getBelegPrijs();
+        }
+        return totalePrijs;
+    }
 }

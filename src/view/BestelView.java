@@ -25,7 +25,9 @@ public class BestelView {
     private Stage stage = new Stage();
     private Label aantal_bestellingen = new Label("Volgnr: 0");
     private Label aantal_broodjes = new Label("Aantal Broodjes: 0");
+    private Label te_betalen = new Label("Te betalen: 0");
     private TableView bestellijnen;
+    private ChoiceBox<String> kortingKeuze;
     private ObservableList<Bestellijn> observableListBestellijnen;
 
     public BestelView(BestelViewController controller){
@@ -49,6 +51,10 @@ public class BestelView {
         aantal_broodjes.setText(s);
     }
 
+    public void setLabelTeBetalen(String s){
+        te_betalen.setText(s);
+    }
+
     private Pane createNodeHierarchy(BestelViewController controller) {
 
         HBox one_one = new HBox(8);
@@ -58,8 +64,8 @@ public class BestelView {
 
         HBox one = new HBox(8);
         one.setSpacing(300);
-        ChoiceBox<String> kortingKeuze = new ChoiceBox<>();
-        kortingKeuze.getItems().addAll("keuze 1", "keuze 2", "keuze 3");
+        kortingKeuze = new ChoiceBox<>();
+        kortingKeuze.getItems().addAll("Geen korting", "10% korting op ganse bestelling", "Goedkoopste broodje met beleg gratis");
         one.getChildren().addAll(one_one, kortingKeuze);
 
         HBox two_one = new HBox(8);
@@ -99,7 +105,10 @@ public class BestelView {
         four_two_one.setPadding(new Insets(10));
         four_two_one.setBackground(new Background(new BackgroundFill(Color.SKYBLUE, new CornerRadii(20), new Insets(0))));
         Button voeg_zelfde_broodje_toe_button = new Button("Voeg zelfde broodje toe");
+        voeg_zelfde_broodje_toe_button.setOnAction(event -> controller.voegZelfdeBroodjeToeButtonPressed());
+
         Button verwijder_broodje_button = new Button("Verwijder broodje");
+        verwijder_broodje_button.setOnAction(event -> controller.VerwijderBroodjeButtonPressed());
         four_two_one.getChildren().addAll(voeg_zelfde_broodje_toe_button, verwijder_broodje_button);
 
         VBox four_two = new VBox(8);
@@ -113,8 +122,8 @@ public class BestelView {
 
         HBox five_one = new HBox(8);
         Button afsluiten_bestelling_button = new Button("afsluiten bestelling");
-        Label te_betalen = new Label("Te Betalen: ");
-        five_one.getChildren().addAll(afsluiten_bestelling_button);
+        afsluiten_bestelling_button.setOnAction(event -> controller.afsluitenBetalingButtonPressed());
+        five_one.getChildren().addAll(afsluiten_bestelling_button, te_betalen);
 
         HBox five_two = new HBox(8);
         Button betaal_button = new Button("Betaal");
@@ -145,5 +154,9 @@ public class BestelView {
     public Bestellijn getSelectedBestellijn() {
         Bestellijn bestellijn = (Bestellijn) bestellijnen.getSelectionModel().getSelectedItem();
         return bestellijn;
+    }
+
+    public String getkortingsStrategie() {
+        return kortingKeuze.getValue();
     }
 }
