@@ -2,12 +2,17 @@ package model.database.loadSaveStrategies;
 
 public class LoadSaveStrategyFactory {
 
-    private LoadSaveStrategy broodjesExcelLoadSaveStrategy = new BroodjesExcelLoadSaveStrategy();
-    private LoadSaveStrategy broodjesTekstLoadSaveStrategy = new BroodjesTekstLoadSaveStrategy();
-    private LoadSaveStrategy belegSoortExcelLoadSaveStrategy = new BelegSoortExcelLoadSaveStrategy();
-    private LoadSaveStrategy belegSoortTekstLoadSaveStrategy = new BelegSoortTekstLoadSaveStrategy();
+    private static LoadSaveStrategyFactory instance = new LoadSaveStrategyFactory();
+    private static LoadSaveStrategy broodjesExcelLoadSaveStrategy = new BroodjesExcelLoadSaveStrategy();
+    private static LoadSaveStrategy broodjesTekstLoadSaveStrategy = new BroodjesTekstLoadSaveStrategy();
+    private static LoadSaveStrategy belegSoortExcelLoadSaveStrategy = new BelegSoortExcelLoadSaveStrategy();
+    private static LoadSaveStrategy belegSoortTekstLoadSaveStrategy = new BelegSoortTekstLoadSaveStrategy();
 
-    public LoadSaveStrategyFactory() {}
+    private LoadSaveStrategyFactory() {}
+
+    public static LoadSaveStrategyFactory getInstance(){
+        return instance;
+    }
 
     public LoadSaveStrategy createBroodjesLoadSaveStrategy(LoadSaveStrategyEnum loadSaveStrategyEnum){
         if (loadSaveStrategyEnum == LoadSaveStrategyEnum.EXCEL){

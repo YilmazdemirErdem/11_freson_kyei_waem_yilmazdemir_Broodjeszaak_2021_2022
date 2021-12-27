@@ -4,15 +4,20 @@ import controller.BestelViewController;
 import javafx.geometry.Insets;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.BelegSoort;
+import model.Broodje;
+
+import java.util.ArrayList;
 
 
 public class BestelView {
     private Stage stage = new Stage();
-    private Label aantal_bestellingen = new Label("Volgnr: 1");
+    private Label aantal_bestellingen = new Label("Volgnr: 0");
     private Label aantal_broodjes = new Label("Aantal Broodjes: 0");
 
     public BestelView(BestelViewController controller){
@@ -41,29 +46,27 @@ public class BestelView {
         HBox one_one = new HBox(8);
         Button nieuwe_bestelling_button = new Button("Nieuwe Bestelling");
         one_one.getChildren().addAll(nieuwe_bestelling_button, aantal_bestellingen);
+        nieuwe_bestelling_button.setOnAction(event -> controller.nieuweBestellingButtonPressed());
 
         HBox one = new HBox(8);
-        one.setSpacing(350);
+        one.setSpacing(300);
         ChoiceBox<String> kortingKeuze = new ChoiceBox<>();
         kortingKeuze.getItems().addAll("keuze 1", "keuze 2", "keuze 3");
         one.getChildren().addAll(one_one, kortingKeuze);
 
         HBox two_one = new HBox(8);
-        Button mais_button = new Button("mais");
-        Button volkoren_button = new Button("volkoren");
-        Button wit_button = new Button("wit");
-        two_one.getChildren().addAll(mais_button, volkoren_button, wit_button);
-        mais_button.setOnAction(event -> controller.maisButtonPressed());
+        for (String broodjeNaam: controller.getOpVoorraadLijstBroodjes()) {
+            Button button = new Button(broodjeNaam);
+            two_one.getChildren().addAll(button);
+            button.setOnAction(event -> controller.broodjeButtonPressed(broodjeNaam));
+        }
 
         HBox two_two = new HBox(8);
-        Button feta_button = new Button("feta");
-        Button hesp_button = new Button("hesp");
-        Button kaas_button = new Button("kaas");
-        Button komkommer_button = new Button("komkommer");
-        Button olijven_button = new Button("olijven");
-        Button sla_button = new Button("sla");
-        Button tomaat_button = new Button("tomaat");
-        two_two.getChildren().addAll(feta_button, hesp_button, kaas_button, komkommer_button, olijven_button, sla_button, tomaat_button);
+        for (String belegNaam: controller.getOpVoorraadLijstBelegSoorten()) {
+            Button button = new Button(belegNaam);
+            two_two.getChildren().addAll(button);
+            button.setOnAction(event -> controller.belegButtonPressed(belegNaam));
+        }
 
         VBox two = new VBox(8);
         two.setPadding(new Insets(10));
@@ -74,6 +77,21 @@ public class BestelView {
         three.getChildren().addAll(aantal_broodjes);
 
         HBox four_one = new HBox(8);
+        TableView table = new TableView<Broodje>();
+        TableColumn<Broodje, String> colBroodjesNaam = new TableColumn<Broodje, String>("Broodjes");
+        colBroodjesNaam.setMinWidth(100);
+        for (Broodje broodje: controller.getLijstBestellijnen().keySet()) {
+            colBroodjesNaam.setCellValueFactory(new PropertyValueFactory<Broodje, String>(broodje.getBroodjesNaam()));
+        }
+        TableColumn<BelegSoort, String> colBelegNaam = new TableColumn<BelegSoort, String>("Beleg");
+        colBelegNaam.setMinWidth(100);
+        for (ArrayList<BelegSoort> belegSoorten: controller.getLijstBestellijnen().values()) {
+            for (BelegSoort belegSoort: belegSoorten) {
+                colBelegNaam.setCellValueFactory(new PropertyValueFactory<BelegSoort, String>(belegSoort.getBelegNaam()));
+            }
+        }
+        table.getColumns().addAll(colBroodjesNaam,colBelegNaam);
+        four_one.getChildren().addAll(table);
 
         VBox four_two_one = new VBox(8);
         four_two_one.setPadding(new Insets(10));

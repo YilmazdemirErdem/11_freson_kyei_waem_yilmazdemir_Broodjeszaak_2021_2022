@@ -22,7 +22,7 @@ public class BelegDatabase {
     public void setBelegMap(LoadSaveStrategyEnum loadSaveStrategyEnum) {
         File file = new File("src/bestanden/beleg.txt");
         File file2 = new File("src/bestanden/beleg.xls");
-        LoadSaveStrategyFactory loadSaveStrategyFactory = new LoadSaveStrategyFactory();
+        LoadSaveStrategyFactory loadSaveStrategyFactory = LoadSaveStrategyFactory.getInstance();
         if (loadSaveStrategyEnum == LoadSaveStrategyEnum.EXCEL){
             this.belegMap = loadSaveStrategyFactory.createBelegSoortLoadSaveStrategy(loadSaveStrategyEnum).load(file2);
         } else {
@@ -33,4 +33,15 @@ public class BelegDatabase {
     public List<BelegSoort> belegSoortMapToList(){
         return new ArrayList<>(this.belegMap.values());
     }
+
+    public ArrayList<String> getOpVoorraadLijstBelegSoorten() {
+        ArrayList<String> opVoorraadBelegSoorten = new ArrayList<>();
+        for (BelegSoort belegSoort : belegSoortMapToList()) {
+            if (belegSoort.getBelegStock() != 0){
+                opVoorraadBelegSoorten.add(belegSoort.getBelegNaam());
+            }
+        }
+        return opVoorraadBelegSoorten;
+    }
 }
+

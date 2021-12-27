@@ -1,19 +1,24 @@
 package model;
 
+import model.database.BelegDatabase;
 import model.database.BroodjesDatabase;
+import model.database.loadSaveStrategies.LoadSaveStrategyEnum;
 import utilities.Observer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BestelFacade implements Subject {
-    private int nr_bestelling = 1;
+    private int nr_bestelling = 0;
     private int aantal_broodjes = 0;
+    private BestellingState bestellingState;
     private HashMap<BestellingEvents, ArrayList<Observer>> observerMap = new HashMap<>();
-    private BroodjesDatabase broodjesDatabase;
+    private BroodjesDatabase broodjesDatabase = new BroodjesDatabase(LoadSaveStrategyEnum.TEKST);
+    private BelegDatabase belegDatabase = new BelegDatabase(LoadSaveStrategyEnum.TEKST);
     private Bestelling bestelling;
 
     public BestelFacade() {
+        //bestellingState = new BestellingState.changeState(BestellingEvents.IN_WACHT);
         initiateObserverMap();
     }
 
@@ -21,6 +26,10 @@ public class BestelFacade implements Subject {
         for (BestellingEvents bestellingEvents : BestellingEvents.values()) {
             this.observerMap.put(bestellingEvents, new ArrayList<Observer>());
         }
+    }
+
+    public void changeState(BestellingEvents bestellingEvents) {
+        bestellingState.changeState(bestellingEvents);
     }
 
     public void toevoegenBroodje(String broodjesNaam){
@@ -32,12 +41,16 @@ public class BestelFacade implements Subject {
 
     }
 
-    public void getLijstBestellijnen(){
-        bestelling.getBestellijen();
+    public HashMap<Broodje, ArrayList<BelegSoort>> getLijstBestellijnen(){
+        return bestelling.getBestellijnen();
     }
 
-    public void getVoorraadLijstBroodjes(){
+    public ArrayList<String> getOpVoorraadLijstBroodjes(){
+        return broodjesDatabase.getOpVoorraadLijstBroodjes();
+    }
 
+    public ArrayList<String> getOpVoorraadLijstBelegSoorten() {
+        return belegDatabase.getOpVoorraadLijstBelegSoorten();
     }
 
     public void notifyObservers(BestellingEvents bestellingEvents, int nrBestelling, int aantalBroodjes){
@@ -55,5 +68,4 @@ public class BestelFacade implements Subject {
     public void addObserverToEvent(BestellingEvents bestellingEvents, Observer obs){
         observerMap.get(bestellingEvents).add(obs);
     }
-
 }

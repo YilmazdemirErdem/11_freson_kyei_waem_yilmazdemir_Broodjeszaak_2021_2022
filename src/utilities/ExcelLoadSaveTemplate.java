@@ -1,21 +1,18 @@
 package utilities;
 
 import excel.ExcelPlugin;
-import jxl.read.biff.BiffException;
-import jxl.write.WriteException;
-import jxl.write.biff.RowsExceededException;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.TreeMap;
 
 public abstract class ExcelLoadSaveTemplate<K,V>{
 
+    ExcelPlugin excelPlugin;
+
     public TreeMap<K, V> load(File file){
-        ExcelPlugin excelPlugin = new ExcelPlugin();
+        excelPlugin = new ExcelPlugin();
         TreeMap<K,V> returnMap = new TreeMap<K,V>();
         ArrayList<ArrayList<String>> input;
         try {
@@ -38,7 +35,7 @@ public abstract class ExcelLoadSaveTemplate<K,V>{
     }
 
     public void save(File file, TreeMap<K,V> treeMap) {
-        ExcelPlugin excelPlugin = new ExcelPlugin();
+        excelPlugin = new ExcelPlugin();
         Collection<V> objecten = treeMap.values();
         ArrayList<ArrayList<String>> outputLijnen = new ArrayList<>();
         try {

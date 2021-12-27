@@ -2,7 +2,7 @@ package model;
 
 public enum BestellingEvents {
 
-    TOEVOEGEN_BROODJE("toevoegen_broodje"), NIEUWE_BESTELLING("nieuwe_bestelling");
+    IN_WACHT("in_wacht"), IN_BESTELLING("in_bestelling"), TOEVOEGEN_BROODJE("toevoegen_broodje");
 
     private String stringValue;
 

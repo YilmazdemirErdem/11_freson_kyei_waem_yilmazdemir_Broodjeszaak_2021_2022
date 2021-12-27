@@ -23,7 +23,7 @@ public class BroodjesDatabase {
     public void setBroodjesMap(LoadSaveStrategyEnum loadSaveStrategyEnum) {
         File file = new File("src/bestanden/broodjes.txt");
         File file2 = new File("src/bestanden/broodjes.xls");
-        LoadSaveStrategyFactory loadSaveStrategyFactory = new LoadSaveStrategyFactory();
+        LoadSaveStrategyFactory loadSaveStrategyFactory = LoadSaveStrategyFactory.getInstance();
         if (loadSaveStrategyEnum == LoadSaveStrategyEnum.EXCEL){
             this.broodjesMap = loadSaveStrategyFactory.createBroodjesLoadSaveStrategy(loadSaveStrategyEnum).load(file2);
         } else {
@@ -31,11 +31,21 @@ public class BroodjesDatabase {
         }
     }
 
-    public List<Broodje> broodjesMapToList(){
+    public ArrayList<Broodje> broodjesMapToList(){
         return new ArrayList<>(this.broodjesMap.values());
     }
 
     public Broodje getBroodje(String broodjesNaam) {
         return (Broodje) this.broodjesMap.get(broodjesNaam);
+    }
+
+    public ArrayList<String> getOpVoorraadLijstBroodjes() {
+        ArrayList<String> opVoorraadBroodjes = new ArrayList<>();
+        for (Broodje broodje : broodjesMapToList()) {
+            if (broodje.getBroodjesStock() != 0){
+                opVoorraadBroodjes.add(broodje.getBroodjesNaam());
+            }
+        }
+        return opVoorraadBroodjes;
     }
 }
