@@ -6,8 +6,8 @@ import java.util.HashMap;
 public class Bestelling {
     private HashMap<Broodje, ArrayList<BelegSoort>> bestellijnen;
 
-    public Bestelling(HashMap<Broodje, ArrayList<BelegSoort>> bestellijnen) {
-        setBestellijnen(bestellijnen);
+    public Bestelling(){
+        bestellijnen = new HashMap<Broodje, ArrayList<BelegSoort>>();
     }
 
     public HashMap<Broodje, ArrayList<BelegSoort>> getBestellijnen() {
@@ -19,6 +19,6 @@ public class Bestelling {
     }
 
     public void toevoegenBroodje(Broodje broodje){
-        bestellijnen.put(broodje, null);
+        bestellijnen.put(broodje, new ArrayList<BelegSoort>());
     }
 }

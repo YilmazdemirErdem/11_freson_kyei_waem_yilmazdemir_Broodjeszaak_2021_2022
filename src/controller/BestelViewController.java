@@ -28,16 +28,16 @@ public class BestelViewController implements Observer {
         this.bestelFacade = bestelFacade;
     }
 
-    public ArrayList<String> getOpVoorraadLijstBroodjes() {
+    public ArrayList<Broodje> getOpVoorraadLijstBroodjes() {
         return bestelFacade.getOpVoorraadLijstBroodjes();
     }
 
-    public ArrayList<String> getOpVoorraadLijstBelegSoorten() {
+    public ArrayList<BelegSoort> getOpVoorraadLijstBelegSoorten() {
         return bestelFacade.getOpVoorraadLijstBelegSoorten();
     }
 
-    public void toevoegenBroodje(String broodjesNaam){
-        bestelFacade.toevoegenBroodje(broodjesNaam);
+    public void toevoegenBroodje(Broodje broodje){
+        bestelFacade.toevoegenBroodje(broodje);
     }
 
     public HashMap<Broodje, ArrayList<BelegSoort>> getLijstBestellijnen(){
@@ -45,15 +45,16 @@ public class BestelViewController implements Observer {
     }
 
     public void nieuweBestellingButtonPressed() {
-        bestelFacade.changeState(BestellingEvents.IN_BESTELLING);
+        //bestelFacade.changeState(BestellingEvents.IN_BESTELLING);
         bestelFacade.updateBy(BestellingEvents.IN_BESTELLING, 1,0);
     }
 
-    public void broodjeButtonPressed(String broodjeNaam) {
+    public void broodjeButtonPressed(Broodje broodje) {
+        bestelFacade.toevoegenBroodje(broodje);
         bestelFacade.updateBy(BestellingEvents.IN_BESTELLING, 0, 1);
     }
 
-    public void belegButtonPressed(String belegNaam) {
+    public void belegButtonPressed(BelegSoort belegSoort) {
         bestelFacade.updateBy(BestellingEvents.IN_BESTELLING, 0, 0);
     }
 

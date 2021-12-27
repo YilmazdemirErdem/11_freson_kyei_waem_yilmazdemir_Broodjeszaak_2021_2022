@@ -34,11 +34,11 @@ public class BelegDatabase {
         return new ArrayList<>(this.belegMap.values());
     }
 
-    public ArrayList<String> getOpVoorraadLijstBelegSoorten() {
-        ArrayList<String> opVoorraadBelegSoorten = new ArrayList<>();
+    public ArrayList<BelegSoort> getOpVoorraadLijstBelegSoorten() {
+        ArrayList<BelegSoort> opVoorraadBelegSoorten = new ArrayList<>();
         for (BelegSoort belegSoort : belegSoortMapToList()) {
             if (belegSoort.getBelegStock() != 0){
-                opVoorraadBelegSoorten.add(belegSoort.getBelegNaam());
+                opVoorraadBelegSoorten.add(belegSoort);
             }
         }
         return opVoorraadBelegSoorten;

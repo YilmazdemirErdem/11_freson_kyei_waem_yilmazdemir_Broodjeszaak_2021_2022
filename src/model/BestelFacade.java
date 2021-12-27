@@ -15,7 +15,7 @@ public class BestelFacade implements Subject {
     private HashMap<BestellingEvents, ArrayList<Observer>> observerMap = new HashMap<>();
     private BroodjesDatabase broodjesDatabase = new BroodjesDatabase(LoadSaveStrategyEnum.TEKST);
     private BelegDatabase belegDatabase = new BelegDatabase(LoadSaveStrategyEnum.TEKST);
-    private Bestelling bestelling;
+    private Bestelling bestelling = new Bestelling();
 
     public BestelFacade() {
         //bestellingState = new BestellingState.changeState(BestellingEvents.IN_WACHT);
@@ -32,8 +32,7 @@ public class BestelFacade implements Subject {
         bestellingState.changeState(bestellingEvents);
     }
 
-    public void toevoegenBroodje(String broodjesNaam){
-        Broodje broodje = broodjesDatabase.getBroodje(broodjesNaam);
+    public void toevoegenBroodje(Broodje broodje){
         bestelling.toevoegenBroodje(broodje);
     }
 
@@ -45,11 +44,11 @@ public class BestelFacade implements Subject {
         return bestelling.getBestellijnen();
     }
 
-    public ArrayList<String> getOpVoorraadLijstBroodjes(){
+    public ArrayList<Broodje> getOpVoorraadLijstBroodjes(){
         return broodjesDatabase.getOpVoorraadLijstBroodjes();
     }
 
-    public ArrayList<String> getOpVoorraadLijstBelegSoorten() {
+    public ArrayList<BelegSoort> getOpVoorraadLijstBelegSoorten() {
         return belegDatabase.getOpVoorraadLijstBelegSoorten();
     }
 

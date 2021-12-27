@@ -55,17 +55,17 @@ public class BestelView {
         one.getChildren().addAll(one_one, kortingKeuze);
 
         HBox two_one = new HBox(8);
-        for (String broodjeNaam: controller.getOpVoorraadLijstBroodjes()) {
-            Button button = new Button(broodjeNaam);
+        for (Broodje broodje: controller.getOpVoorraadLijstBroodjes()) {
+            Button button = new Button(broodje.getBroodjesNaam());
             two_one.getChildren().addAll(button);
-            button.setOnAction(event -> controller.broodjeButtonPressed(broodjeNaam));
+            button.setOnAction(event -> controller.broodjeButtonPressed(broodje));
         }
 
         HBox two_two = new HBox(8);
-        for (String belegNaam: controller.getOpVoorraadLijstBelegSoorten()) {
-            Button button = new Button(belegNaam);
+        for (BelegSoort belegSoort: controller.getOpVoorraadLijstBelegSoorten()) {
+            Button button = new Button(belegSoort.getBelegNaam());
             two_two.getChildren().addAll(button);
-            button.setOnAction(event -> controller.belegButtonPressed(belegNaam));
+            button.setOnAction(event -> controller.belegButtonPressed(belegSoort));
         }
 
         VBox two = new VBox(8);
@@ -84,7 +84,7 @@ public class BestelView {
             colBroodjesNaam.setCellValueFactory(new PropertyValueFactory<Broodje, String>(broodje.getBroodjesNaam()));
         }
         TableColumn<BelegSoort, String> colBelegNaam = new TableColumn<BelegSoort, String>("Beleg");
-        colBelegNaam.setMinWidth(100);
+        colBelegNaam.setMinWidth(350);
         for (ArrayList<BelegSoort> belegSoorten: controller.getLijstBestellijnen().values()) {
             for (BelegSoort belegSoort: belegSoorten) {
                 colBelegNaam.setCellValueFactory(new PropertyValueFactory<BelegSoort, String>(belegSoort.getBelegNaam()));
@@ -106,7 +106,7 @@ public class BestelView {
         four_two.getChildren().addAll(four_two_one, annuleer_bestelling_button);
 
         HBox four = new HBox(8);
-        four.setSpacing(400);
+        four.setSpacing(10);
         four.getChildren().addAll(four_one, four_two);
 
         HBox five_one = new HBox(8);

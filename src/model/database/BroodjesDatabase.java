@@ -39,11 +39,11 @@ public class BroodjesDatabase {
         return (Broodje) this.broodjesMap.get(broodjesNaam);
     }
 
-    public ArrayList<String> getOpVoorraadLijstBroodjes() {
-        ArrayList<String> opVoorraadBroodjes = new ArrayList<>();
+    public ArrayList<Broodje> getOpVoorraadLijstBroodjes() {
+        ArrayList<Broodje> opVoorraadBroodjes = new ArrayList<>();
         for (Broodje broodje : broodjesMapToList()) {
             if (broodje.getBroodjesStock() != 0){
-                opVoorraadBroodjes.add(broodje.getBroodjesNaam());
+                opVoorraadBroodjes.add(broodje);
             }
         }
         return opVoorraadBroodjes;
