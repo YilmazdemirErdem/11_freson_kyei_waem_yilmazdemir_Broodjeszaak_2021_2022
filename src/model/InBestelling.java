@@ -1,5 +1,9 @@
 package model;
 
+import model.kortingStrategies.KortingStrategy;
+import model.kortingStrategies.KortingStrategyEnum;
+import model.kortingStrategies.KortingStrategyFactory;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -37,6 +41,9 @@ public class InBestelling implements BestellingState {
 
     @Override
     public double afsluiten(String kortingsStrategie) {
+        KortingStrategyEnum kortingStrategyEnum = KortingStrategyEnum.valueOf(kortingsStrategie);
+        KortingStrategyFactory kortingStrategyFactory = KortingStrategyFactory.getInstance();
+
         double totalePrijs = 0;
         for (Bestellijn bestellijn:bestelling.getBestellijnen()) {
             totalePrijs += bestellijn.getPrijsBestellijn();
@@ -46,6 +53,21 @@ public class InBestelling implements BestellingState {
             BigDecimal bd = new BigDecimal(totalePrijs).setScale(2, RoundingMode.HALF_UP);
             return bd.doubleValue();
         }
+        if (kortingStrategyEnum == KortingStrategyEnum.TIEN_PROCENT_OP_GANSE_BESTELLING){
+
+        }else{
+
+        }
+
+        /*double totalePrijs = 0;
+        for (Bestellijn bestellijn:bestelling.getBestellijnen()) {
+            totalePrijs += bestellijn.getPrijsBestellijn();
+        }
+
+        if (kortingsStrategie == null){
+            BigDecimal bd = new BigDecimal(totalePrijs).setScale(2, RoundingMode.HALF_UP);
+            return bd.doubleValue();
+        }*/
         if (kortingsStrategie.equals("10% korting op ganse bestelling")){
             totalePrijs -= totalePrijs*0.1;
         }else if(kortingsStrategie.equals("Goedkoopste broodje met beleg gratis")){
