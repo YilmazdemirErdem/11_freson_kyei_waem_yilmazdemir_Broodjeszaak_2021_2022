@@ -15,6 +15,9 @@ import model.BelegSoort;
 import model.Bestellijn;
 import model.Broodje;
 import model.database.BroodjesDatabase;
+import model.state.BestellingState;
+import model.state.InBestelling;
+import model.state.kortingStrategies.KortingStrategyEnum;
 
 import java.sql.SQLOutput;
 import java.util.ArrayList;
@@ -26,8 +29,15 @@ public class BestelView {
     private Label aantal_bestellingen = new Label("Volgnr: 0");
     private Label aantal_broodjes = new Label("Aantal Broodjes: 0");
     private Label te_betalen = new Label("Te betalen: 0");
-    private TableView bestellijnen;
+    private Button nieuwe_bestelling_button;
     private ChoiceBox<String> kortingKeuze;
+    private Button voeg_zelfde_broodje_toe_button;
+    private Button verwijder_broodje_button;
+    private Button annuleer_bestelling_button;
+    private Button afsluiten_bestelling_button;
+    private Button betaal_button;
+    private Button naar_keuken_button;
+    private TableView bestellijnen;
     private ObservableList<Bestellijn> observableListBestellijnen;
 
     public BestelView(BestelViewController controller){
@@ -58,14 +68,15 @@ public class BestelView {
     private Pane createNodeHierarchy(BestelViewController controller) {
 
         HBox one_one = new HBox(8);
-        Button nieuwe_bestelling_button = new Button("Nieuwe Bestelling");
+        nieuwe_bestelling_button = new Button("Nieuwe Bestelling");
         one_one.getChildren().addAll(nieuwe_bestelling_button, aantal_bestellingen);
         nieuwe_bestelling_button.setOnAction(event -> controller.nieuweBestellingButtonPressed());
 
         HBox one = new HBox(8);
-        one.setSpacing(300);
+        one.setSpacing(125);
         kortingKeuze = new ChoiceBox<>();
         kortingKeuze.getItems().addAll("Geen korting", "10% korting op ganse bestelling", "Goedkoopste broodje met beleg gratis");
+        kortingKeuze.setDisable(true);
         one.getChildren().addAll(one_one, kortingKeuze);
 
         HBox two_one = new HBox(8);
@@ -96,7 +107,7 @@ public class BestelView {
         colBroodjesNaam.setMinWidth(100);
         colBroodjesNaam.setCellValueFactory(new PropertyValueFactory<Bestellijn, String>("naamBroodje"));
         TableColumn<BelegSoort, ArrayList<String>> colBelegNaam = new TableColumn<BelegSoort, ArrayList<String>>("Beleg");
-        colBelegNaam.setMinWidth(350);
+        colBelegNaam.setMinWidth(250);
         colBelegNaam.setCellValueFactory(new PropertyValueFactory<BelegSoort, ArrayList<String>>("namenBeleg"));
         bestellijnen.getColumns().addAll(colBroodjesNaam,colBelegNaam);
         four_one.getChildren().addAll(bestellijnen);
@@ -104,16 +115,19 @@ public class BestelView {
         VBox four_two_one = new VBox(8);
         four_two_one.setPadding(new Insets(10));
         four_two_one.setBackground(new Background(new BackgroundFill(Color.SKYBLUE, new CornerRadii(20), new Insets(0))));
-        Button voeg_zelfde_broodje_toe_button = new Button("Voeg zelfde broodje toe");
+        voeg_zelfde_broodje_toe_button = new Button("Voeg zelfde broodje toe");
+        voeg_zelfde_broodje_toe_button.setDisable(true);
         voeg_zelfde_broodje_toe_button.setOnAction(event -> controller.voegZelfdeBroodjeToeButtonPressed());
-
-        Button verwijder_broodje_button = new Button("Verwijder broodje");
+        verwijder_broodje_button = new Button("Verwijder broodje");
+        verwijder_broodje_button.setDisable(true);
         verwijder_broodje_button.setOnAction(event -> controller.VerwijderBroodjeButtonPressed());
         four_two_one.getChildren().addAll(voeg_zelfde_broodje_toe_button, verwijder_broodje_button);
 
         VBox four_two = new VBox(8);
-        four_two.setSpacing(100);
-        Button annuleer_bestelling_button = new Button("Annuleer bestelling");
+        four_two.setSpacing(50);
+        annuleer_bestelling_button = new Button("Annuleer bestelling");
+        annuleer_bestelling_button.setDisable(true);
+        annuleer_bestelling_button.setOnAction(event -> controller.annuleerBestelling());
         four_two.getChildren().addAll(four_two_one, annuleer_bestelling_button);
 
         HBox four = new HBox(8);
@@ -121,17 +135,22 @@ public class BestelView {
         four.getChildren().addAll(four_one, four_two);
 
         HBox five_one = new HBox(8);
-        Button afsluiten_bestelling_button = new Button("afsluiten bestelling");
+        afsluiten_bestelling_button = new Button("afsluiten bestelling");
+        afsluiten_bestelling_button.setDisable(true);
         afsluiten_bestelling_button.setOnAction(event -> controller.afsluitenBetalingButtonPressed());
         five_one.getChildren().addAll(afsluiten_bestelling_button, te_betalen);
 
         HBox five_two = new HBox(8);
-        Button betaal_button = new Button("Betaal");
-        Button naar_keuken_button = new Button("Naar Keuken");
+        betaal_button = new Button("Betaal");
+        betaal_button.setDisable(true);
+        betaal_button.setOnAction(event -> controller.betaalBestelling());
+        naar_keuken_button = new Button("Naar Keuken");
+        naar_keuken_button.setDisable(true);
+        naar_keuken_button.setOnAction(event -> controller.zendNaarKeukenBestelling());
         five_two.getChildren().addAll(betaal_button, naar_keuken_button);
 
         HBox five = new HBox(8);
-        five.setSpacing(300);
+        five.setSpacing(100);
         five.setPadding(new Insets(10));
         five.setBackground(new Background(new BackgroundFill(Color.SKYBLUE, new CornerRadii(20), new Insets(0))));
         five.getChildren().addAll(five_one, five_two);
@@ -149,7 +168,53 @@ public class BestelView {
         bestellijnen.refresh();
     }
 
-    public void updateStatusBroodjesKnoppen(){};
+    public void updateStatusInWachtKnoppen(Boolean status){
+        // broodjes, beleg, verwijder, dezelfde, annuleer, afsluiten knoppen
+        nieuwe_bestelling_button.setDisable(status);
+        kortingKeuze.setDisable(!status);
+        verwijder_broodje_button.setDisable(!status);
+        voeg_zelfde_broodje_toe_button.setDisable(!status);
+        annuleer_bestelling_button.setDisable(!status);
+        afsluiten_bestelling_button.setDisable(!status);
+        betaal_button.setDisable(!status);
+        naar_keuken_button.setDisable(!status);
+    }
+
+    public void updateStatusInBestellingKnoppen(Boolean status){
+        // broodjes, beleg, verwijder, dezelfde, annuleer, afsluiten knoppen
+        nieuwe_bestelling_button.setDisable(!status);
+        kortingKeuze.setDisable(status);
+        verwijder_broodje_button.setDisable(status);
+        voeg_zelfde_broodje_toe_button.setDisable(status);
+        annuleer_bestelling_button.setDisable(status);
+        afsluiten_bestelling_button.setDisable(status);
+        betaal_button.setDisable(!status);
+        naar_keuken_button.setDisable(!status);
+    }
+
+    public void updateStatusInAfgeslotenKnoppen(Boolean status){
+        // broodjes, beleg, verwijder, dezelfde, annuleer, afsluiten knoppen
+        nieuwe_bestelling_button.setDisable(!status);
+        kortingKeuze.setDisable(!status);
+        verwijder_broodje_button.setDisable(!status);
+        voeg_zelfde_broodje_toe_button.setDisable(!status);
+        annuleer_bestelling_button.setDisable(status);
+        afsluiten_bestelling_button.setDisable(!status);
+        betaal_button.setDisable(status);
+        naar_keuken_button.setDisable(!status);
+    };
+
+    public void updateStatusInBetaaldKnoppen(Boolean status){
+        // broodjes, beleg, verwijder, dezelfde, annuleer, afsluiten knoppen
+        nieuwe_bestelling_button.setDisable(!status);
+        kortingKeuze.setDisable(!status);
+        verwijder_broodje_button.setDisable(!status);
+        voeg_zelfde_broodje_toe_button.setDisable(!status);
+        annuleer_bestelling_button.setDisable(!status);
+        afsluiten_bestelling_button.setDisable(!status);
+        betaal_button.setDisable(!status);
+        naar_keuken_button.setDisable(status);
+    }
 
     public Bestellijn getSelectedBestellijn() {
         Bestellijn bestellijn = (Bestellijn) bestellijnen.getSelectionModel().getSelectedItem();

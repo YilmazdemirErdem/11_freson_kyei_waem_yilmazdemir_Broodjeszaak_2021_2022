@@ -119,4 +119,12 @@ public class Bestelling {
     public void annuleer(){
         bestellingState.annuleren();
     }
+
+    public void betalen() {
+        bestellingState.betalen();
+    }
+
+    public void naarKeuken() {
+        bestellingState.naar_keuken();
+    }
 }

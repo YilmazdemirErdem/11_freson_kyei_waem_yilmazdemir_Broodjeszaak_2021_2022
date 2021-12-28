@@ -46,7 +46,7 @@ public class Afgesloten implements BestellingState {
 
     @Override
     public void betalen() {
-        bestelling.setState(bestelling.getInWachtrij());
+        bestelling.setState(bestelling.getBetaald());
     }
 
     @Override

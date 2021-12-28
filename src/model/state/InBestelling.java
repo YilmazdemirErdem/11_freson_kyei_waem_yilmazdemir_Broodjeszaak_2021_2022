@@ -47,6 +47,7 @@ public class InBestelling implements BestellingState {
         }
         if (kortingsStrategie == null){
             BigDecimal bd = new BigDecimal(totalePrijs).setScale(2, RoundingMode.HALF_UP);
+            bestelling.setState(bestelling.getAfgesloten());
             return bd.doubleValue();
         }
         KortingStrategyFactory kortingStrategyFactory = KortingStrategyFactory.getInstance();
@@ -56,6 +57,7 @@ public class InBestelling implements BestellingState {
             }
         }
         BigDecimal bd = new BigDecimal(totalePrijs).setScale(2, RoundingMode.HALF_UP);
+        bestelling.setState(bestelling.getAfgesloten());
         return bd.doubleValue();
     }
 

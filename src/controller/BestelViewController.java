@@ -52,13 +52,14 @@ public class BestelViewController implements Observer {
 
     public void nieuweBestellingButtonPressed() {
         bestelFacade.nieuweBestelling();
-        bestelFacade.updateBy(BestellingEvents.NIEUWE_BESTELLING, 1,0);
+        bestelFacade.updateBy(BestellingEvents.NIEUWE_BESTELLING, 1,0, 0);
+        bestelView.updateStatusInBestellingKnoppen(false);
     }
 
     public void broodjeButtonPressed(Broodje broodje) {
         bestelFacade.toevoegenBroodje(broodje);
         bestelView.updateBestelijnen(this);
-        bestelFacade.updateBy(BestellingEvents.TOEVOEGEN_BROODJE, 0, 1);
+        bestelFacade.updateBy(BestellingEvents.TOEVOEGEN_BROODJE, 0, 1, 0);
     }
 
     public void belegButtonPressed(BelegSoort belegSoort) {
@@ -68,7 +69,7 @@ public class BestelViewController implements Observer {
         }else{
             bestelFacade.toevoegenBeleg(bestellijn, belegSoort);
             bestelView.updateBestelijnen(this);
-            bestelFacade.updateBy(BestellingEvents.TOEVOEGEN_BELEG, 0, 0);
+            bestelFacade.updateBy(BestellingEvents.TOEVOEGEN_BELEG, 0, 0, 0);
         }
     }
 
@@ -79,7 +80,7 @@ public class BestelViewController implements Observer {
         }else{
             bestelFacade.voegZelfdeToe(bestellijn);
             bestelView.updateBestelijnen(this);
-            bestelFacade.updateBy(BestellingEvents.TOEVOEGEN_IDENTIEK_BROODJE, 0, 1);
+            bestelFacade.updateBy(BestellingEvents.TOEVOEGEN_IDENTIEK_BROODJE, 0, 1, 0);
         }
     }
 
@@ -90,13 +91,30 @@ public class BestelViewController implements Observer {
         }else{
             bestelFacade.verwijderBestellijn(bestellijn);
             bestelView.updateBestelijnen(this);
-            bestelFacade.updateBy(BestellingEvents.VERWIJDER_BROODJE, 0, -1);
+            bestelFacade.updateBy(BestellingEvents.VERWIJDER_BROODJE, 0, -1, 0);
         }
+    }
+
+    public void annuleerBestelling() {
+        bestelFacade.annuleerBestelling();
+        bestelView.updateStatusInWachtKnoppen(false);
     }
 
     public void afsluitenBetalingButtonPressed() {
         bestelFacade.berekenTotaalBedrag(bestelView.getkortingsStrategie());
-        bestelFacade.updateBy(BestellingEvents.AFSLUITEN, 0, 0);
+        bestelFacade.updateBy(BestellingEvents.AFSLUITEN, 0, 0, 0);
+        bestelView.updateStatusInAfgeslotenKnoppen(false);
+    }
+
+    public void betaalBestelling() {
+        bestelFacade.betaalBestelling();
+        bestelView.updateStatusInBetaaldKnoppen(false);
+    }
+
+    public void zendNaarKeukenBestelling() {
+        bestelFacade.zendNaarKeuken();
+        bestelFacade.updateBy(BestellingEvents.NAAR_KEUKEN, 0,0, 1);
+        bestelView.updateStatusInWachtKnoppen(false);
     }
 
     //called by view
@@ -106,9 +124,10 @@ public class BestelViewController implements Observer {
 
     //called by model
     @Override
-    public void update(int nrBestelling, int aantalBroodjes, double totalePrijs) {
+    public void update(int nrBestelling, int aantalBroodjes, double totalePrijs, int aantalInWachtrij) {
         bestelView.setLabelAantalBestellingen("Volgnr: " + nrBestelling);
         bestelView.setLabelAantalBroodjes("Aantal Broodjes: " + aantalBroodjes);
         bestelView.setLabelTeBetalen("Te betalen: " + totalePrijs + "$");
     }
+
 }

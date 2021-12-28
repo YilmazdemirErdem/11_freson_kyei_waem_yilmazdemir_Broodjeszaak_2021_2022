@@ -12,6 +12,7 @@ public class BestelFacade implements Subject {
     private int nr_bestelling = 0;
     private int aantal_broodjes = 0;
     private double totalePrijs = 0.0;
+    private int aantalInWachtrij = 0;
     private HashMap<BestellingEvents, ArrayList<Observer>> observerMap = new HashMap<>();
     private BroodjesDatabase broodjesDatabase = new BroodjesDatabase(LoadSaveStrategyEnum.TEKST);
     private BelegDatabase belegDatabase = new BelegDatabase(LoadSaveStrategyEnum.TEKST);
@@ -19,6 +20,10 @@ public class BestelFacade implements Subject {
 
     public BestelFacade() {
         initiateObserverMap();
+    }
+
+    public Bestelling getBestelling() {
+        return bestelling;
     }
 
     private void initiateObserverMap() {
@@ -68,20 +73,33 @@ public class BestelFacade implements Subject {
         bestelling.verwijderBestellijn(bestellijn);
     }
 
+    public void annuleerBestelling() {
+        bestelling.annuleer();
+    }
+
     public void berekenTotaalBedrag(String kortingsStrategie) {
         totalePrijs = bestelling.berekenTotaalBedrag(kortingsStrategie);
     }
 
-    public void notifyObservers(BestellingEvents bestellingEvents, int nrBestelling, int aantalBroodjes, double totalePrijs){
+    public void betaalBestelling() {
+        bestelling.betalen();
+    }
+
+    public void zendNaarKeuken() {
+        bestelling.naarKeuken();
+    }
+
+    public void notifyObservers(BestellingEvents bestellingEvents, int nrBestelling, int aantalBroodjes, double totalePrijs, int aantalInWachtrij){
         for (Observer obs: observerMap.get(bestellingEvents)){
-            obs.update(nrBestelling, aantalBroodjes, totalePrijs);
+            obs.update(nrBestelling, aantalBroodjes, totalePrijs, aantalInWachtrij);
         }
     }
 
-    public void updateBy(BestellingEvents bestellingEvents, int nr_bestelling_extra, int aantal_broodjes_extra){
+    public void updateBy(BestellingEvents bestellingEvents, int nr_bestelling_extra, int aantal_broodjes_extra, int aantal_InWachtrij){
         nr_bestelling += nr_bestelling_extra;
         aantal_broodjes += aantal_broodjes_extra;
-        notifyObservers(bestellingEvents, nr_bestelling, aantal_broodjes, totalePrijs);
+        aantalInWachtrij += aantal_InWachtrij;
+        notifyObservers(bestellingEvents, nr_bestelling, aantal_broodjes, totalePrijs, aantalInWachtrij);
     }
 
     public void addObserverToEvent(BestellingEvents bestellingEvents, Observer obs){
