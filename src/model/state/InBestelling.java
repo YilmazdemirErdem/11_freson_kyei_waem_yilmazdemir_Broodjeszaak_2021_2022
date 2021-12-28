@@ -49,12 +49,11 @@ public class InBestelling implements BestellingState {
             BigDecimal bd = new BigDecimal(totalePrijs).setScale(2, RoundingMode.HALF_UP);
             return bd.doubleValue();
         }
-        KortingStrategyEnum kortingStrategyEnum = KortingStrategyEnum.valueOf(kortingsStrategie);
         KortingStrategyFactory kortingStrategyFactory = KortingStrategyFactory.getInstance();
-        if (kortingStrategyEnum == KortingStrategyEnum.TIEN_PROCENT_OP_GANSE_BESTELLING){
-            totalePrijs = kortingStrategyFactory.createKortingStrategy(kortingStrategyEnum).pasKortingToe(totalePrijs, bestelling.getBestellijnen());
-        } else {
-            totalePrijs = kortingStrategyFactory.createKortingStrategy(kortingStrategyEnum).pasKortingToe(totalePrijs, bestelling.getBestellijnen());
+        for (KortingStrategyEnum kortingsEnum: KortingStrategyEnum.values()) {
+            if (kortingsEnum.getStringValue().equals(kortingsStrategie)){
+                totalePrijs = kortingStrategyFactory.createKortingStrategy(kortingsEnum).pasKortingToe(totalePrijs, bestelling.getBestellijnen());
+            }
         }
         BigDecimal bd = new BigDecimal(totalePrijs).setScale(2, RoundingMode.HALF_UP);
         return bd.doubleValue();

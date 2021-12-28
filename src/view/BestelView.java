@@ -65,7 +65,7 @@ public class BestelView {
         HBox one = new HBox(8);
         one.setSpacing(300);
         kortingKeuze = new ChoiceBox<>();
-        kortingKeuze.getItems().addAll("Geen korting", "10%_korting_op_ganse_bestelling", "Goedkoopste_broodje_met_beleg_gratis");
+        kortingKeuze.getItems().addAll("Geen korting", "10% korting op ganse bestelling", "Goedkoopste broodje met beleg gratis");
         one.getChildren().addAll(one_one, kortingKeuze);
 
         HBox two_one = new HBox(8);
