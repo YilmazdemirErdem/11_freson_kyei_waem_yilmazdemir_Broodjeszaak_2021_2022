@@ -12,14 +12,12 @@ public class BestelFacade implements Subject {
     private int nr_bestelling = 0;
     private int aantal_broodjes = 0;
     private double totalePrijs = 0.0;
-    private BestellingState bestellingState;
     private HashMap<BestellingEvents, ArrayList<Observer>> observerMap = new HashMap<>();
     private BroodjesDatabase broodjesDatabase = new BroodjesDatabase(LoadSaveStrategyEnum.TEKST);
     private BelegDatabase belegDatabase = new BelegDatabase(LoadSaveStrategyEnum.TEKST);
     private Bestelling bestelling = new Bestelling();
 
     public BestelFacade() {
-        //bestellingState = new BestellingState.changeState(BestellingEvents.IN_WACHT);
         initiateObserverMap();
     }
 
@@ -29,8 +27,8 @@ public class BestelFacade implements Subject {
         }
     }
 
-    public void changeState(BestellingEvents bestellingEvents) {
-        bestellingState.changeState(bestellingEvents);
+    public void nieuweBestelling() {
+         bestelling.nieuweBestelling();
     }
 
     public void toevoegenBroodje(Broodje broodje){
@@ -39,10 +37,6 @@ public class BestelFacade implements Subject {
 
     public void toevoegenBeleg(Bestellijn bestellijn, BelegSoort belegSoort) {
         bestelling.toevoegenBeleg(bestellijn, belegSoort);
-    }
-
-    public void voegBestellijnToe(String broodjesNaam){
-
     }
 
     public ArrayList<Bestellijn> getLijstBestellijnen(){
@@ -67,7 +61,7 @@ public class BestelFacade implements Subject {
             bestellijnCopy.voegBelegToe(belegSoort);
         }
 
-        bestelling.voegBestellijnToe(bestellijnCopy);
+        bestelling.voegDezelfdeBestellijnToe(bestellijnCopy);
     }
 
     public void verwijderBestellijn(Bestellijn bestellijn) {
