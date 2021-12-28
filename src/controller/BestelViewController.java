@@ -58,6 +58,7 @@ public class BestelViewController implements Observer {
     public void broodjeButtonPressed(Broodje broodje) {
         bestelFacade.toevoegenBroodje(broodje);
         bestelView.updateBestelijnen(this);
+        bestelView.updateBroodjesStatusKnoppen(this);
         bestelFacade.updateBy(BestellingEvents.TOEVOEGEN_BROODJE, 0, 1, 0);
     }
 

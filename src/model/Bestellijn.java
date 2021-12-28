@@ -15,6 +15,7 @@ public class Bestellijn {
         setBroodje(broodje);
         this.belegSoorten = new ArrayList<>();
         this.namenBeleg = new ArrayList<>();
+        broodje.aanpassenVoorraad(1);
     }
 
     public Broodje getBroodje() {

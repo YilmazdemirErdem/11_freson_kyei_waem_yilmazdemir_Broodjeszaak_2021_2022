@@ -38,6 +38,7 @@ public class BestelView {
     private Button betaal_button;
     private Button naar_keuken_button;
     private TableView bestellijnen;
+    private ObservableList<Broodje> observableListBroodjes;
     private ObservableList<Bestellijn> observableListBestellijnen;
 
     public BestelView(BestelViewController controller){
@@ -80,14 +81,14 @@ public class BestelView {
         one.getChildren().addAll(one_one, kortingKeuze);
 
         HBox two_one = new HBox(8);
-        for (Broodje broodje: controller.getOpVoorraadLijstBroodjes()) {
+        for (Broodje broodje: controller.getOpVoorraadLijstBroodjes()) { //iteren over observableList van broodjes, iets fout met opstart daarna zou het moeten werken
             Button button = new Button(broodje.getBroodjesNaam());
             two_one.getChildren().addAll(button);
             button.setOnAction(event -> controller.broodjeButtonPressed(broodje));
         }
 
         HBox two_two = new HBox(8);
-        for (BelegSoort belegSoort: controller.getOpVoorraadLijstBelegSoorten()) {
+        for (BelegSoort belegSoort: controller.getOpVoorraadLijstBelegSoorten()) { //iteren over observableList van belegsoorten
             Button button = new Button(belegSoort.getBelegNaam());
             two_two.getChildren().addAll(button);
             button.setOnAction(event -> controller.belegButtonPressed(belegSoort));
@@ -166,6 +167,10 @@ public class BestelView {
         observableListBestellijnen = FXCollections.observableArrayList(controller.getLijstBestellijnen());
         bestellijnen.setItems(observableListBestellijnen);
         bestellijnen.refresh();
+    }
+
+    public void updateBroodjesStatusKnoppen(BestelViewController controller){
+        observableListBroodjes = FXCollections.observableArrayList(controller.getOpVoorraadLijstBroodjes());
     }
 
     public void updateStatusInWachtKnoppen(Boolean status){
