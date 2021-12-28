@@ -106,7 +106,7 @@ public class BestelViewController implements Observer {
 
     //called by model
     @Override
-    public void update(int nrBestelling, int aantalBroodjes, double totalePrijs) {
+    public void update(int nrBestelling, int aantalBroodjes, double totalePrijs, int aantalBroodjesInWachtrij) {
         bestelView.setLabelAantalBestellingen("Volgnr: " + nrBestelling);
         bestelView.setLabelAantalBroodjes("Aantal Broodjes: " + aantalBroodjes);
         bestelView.setLabelTeBetalen("Te betalen: " + totalePrijs + "$");

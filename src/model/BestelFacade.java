@@ -12,6 +12,7 @@ public class BestelFacade implements Subject {
     private int nr_bestelling = 0;
     private int aantal_broodjes = 0;
     private double totalePrijs = 0.0;
+    private int aantalBroodjesInWachtrij = 0;
     private HashMap<BestellingEvents, ArrayList<Observer>> observerMap = new HashMap<>();
     private BroodjesDatabase broodjesDatabase = new BroodjesDatabase(LoadSaveStrategyEnum.TEKST);
     private BelegDatabase belegDatabase = new BelegDatabase(LoadSaveStrategyEnum.TEKST);
@@ -71,17 +72,20 @@ public class BestelFacade implements Subject {
     public void berekenTotaalBedrag(String kortingsStrategie) {
         totalePrijs = bestelling.berekenTotaalBedrag(kortingsStrategie);
     }
+    public void berekenAantalInWachtrij(String kortingsStrategie) {
+        aantalBroodjesInWachtrij = 0;
+    }
 
-    public void notifyObservers(BestellingEvents bestellingEvents, int nrBestelling, int aantalBroodjes, double totalePrijs){
+    public void notifyObservers(BestellingEvents bestellingEvents, int nrBestelling, int aantalBroodjes, double totalePrijs, int aantalBroodjesInWachtrij){
         for (Observer obs: observerMap.get(bestellingEvents)){
-            obs.update(nrBestelling, aantalBroodjes, totalePrijs);
+            obs.update(nrBestelling, aantalBroodjes, totalePrijs, aantalBroodjesInWachtrij);
         }
     }
 
     public void updateBy(BestellingEvents bestellingEvents, int nr_bestelling_extra, int aantal_broodjes_extra){
         nr_bestelling += nr_bestelling_extra;
         aantal_broodjes += aantal_broodjes_extra;
-        notifyObservers(bestellingEvents, nr_bestelling, aantal_broodjes, totalePrijs);
+        notifyObservers(bestellingEvents, nr_bestelling, aantal_broodjes, totalePrijs, aantalBroodjesInWachtrij);
     }
 
     public void addObserverToEvent(BestellingEvents bestellingEvents, Observer obs){
