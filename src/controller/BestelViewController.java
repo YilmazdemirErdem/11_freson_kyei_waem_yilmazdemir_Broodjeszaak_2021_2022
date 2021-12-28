@@ -1,6 +1,5 @@
 package controller;
 
-import javafx.scene.control.Alert;
 import model.*;
 import utilities.Observer;
 import view.BestelView;
@@ -124,10 +123,9 @@ public class BestelViewController implements Observer {
 
     //called by model
     @Override
-    public void update(int nrBestelling, int aantalBroodjes, double totalePrijs, int aantalInWachtrij) {
+    public void update(int nrBestelling, int aantalBroodjes, double totalePrijs, int aantalBroodjesInWachtrij) {
         bestelView.setLabelAantalBestellingen("Volgnr: " + nrBestelling);
         bestelView.setLabelAantalBroodjes("Aantal Broodjes: " + aantalBroodjes);
         bestelView.setLabelTeBetalen("Te betalen: " + totalePrijs + "$");
     }
-
 }
