@@ -1,4 +1,4 @@
-package model.kortingStrategies;
+package model.state.kortingStrategies;
 
 import model.Bestellijn;
 

@@ -1,5 +1,7 @@
 package model;
 
+import model.state.*;
+
 import java.util.ArrayList;
 
 public class Bestelling {

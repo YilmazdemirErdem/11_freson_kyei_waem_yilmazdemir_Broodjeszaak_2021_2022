@@ -1,4 +1,8 @@
-package model;
+package model.state;
+
+import model.BelegSoort;
+import model.Bestellijn;
+import model.Broodje;
 
 public interface BestellingState {
 

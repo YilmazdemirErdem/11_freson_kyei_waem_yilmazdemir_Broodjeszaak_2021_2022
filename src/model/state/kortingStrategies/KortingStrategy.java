@@ -1,7 +1,6 @@
-package model.kortingStrategies;
+package model.state.kortingStrategies;
 
 import model.Bestellijn;
-import model.Bestelling;
 
 import java.util.ArrayList;
 
