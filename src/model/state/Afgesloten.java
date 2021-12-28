@@ -40,8 +40,9 @@ public class Afgesloten implements BestellingState {
     }
 
     @Override
-    public void annuleren() {
-        bestelling.setState(bestelling.getInWacht());
+    public void annuleren(Bestelling bestelling) {
+        bestelling.getBestellijnen().clear();
+        this.bestelling.setState(this.bestelling.getInWacht());
     }
 
     @Override

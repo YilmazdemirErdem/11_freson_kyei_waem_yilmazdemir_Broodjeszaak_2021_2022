@@ -40,7 +40,7 @@ public class InWachtrij implements BestellingState {
     }
 
     @Override
-    public void annuleren() {
+    public void annuleren(Bestelling bestelling) {
         throw new IllegalArgumentException("you can't do this function");
     }
 

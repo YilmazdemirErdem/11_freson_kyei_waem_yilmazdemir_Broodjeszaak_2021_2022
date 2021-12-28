@@ -96,6 +96,8 @@ public class BestelViewController implements Observer {
 
     public void annuleerBestelling() {
         bestelFacade.annuleerBestelling();
+        bestelView.updateBestelijnen(this);
+        bestelFacade.updateBy(BestellingEvents.ANNULEREN, 0,0,0);
         bestelView.updateStatusInWachtKnoppen(false);
     }
 

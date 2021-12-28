@@ -74,7 +74,8 @@ public class BestelFacade implements Subject {
     }
 
     public void annuleerBestelling() {
-        bestelling.annuleer();
+        this.totalePrijs = 0.0;
+        this.bestelling.annuleer(this.bestelling);
     }
 
     public void berekenTotaalBedrag(String kortingsStrategie) {

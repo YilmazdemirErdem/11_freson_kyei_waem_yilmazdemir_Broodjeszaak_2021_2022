@@ -116,8 +116,8 @@ public class Bestelling {
         return bestellingState.afsluiten(kortingsStrategie);
     }
 
-    public void annuleer(){
-        bestellingState.annuleren();
+    public void annuleer(Bestelling bestelling){
+        bestellingState.annuleren(bestelling);
     }
 
     public void betalen() {

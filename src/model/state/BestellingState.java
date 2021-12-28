@@ -2,6 +2,7 @@ package model.state;
 
 import model.BelegSoort;
 import model.Bestellijn;
+import model.Bestelling;
 import model.Broodje;
 
 public interface BestellingState {
@@ -18,7 +19,7 @@ public interface BestellingState {
 
     double afsluiten(String kortingsStrategie);
 
-    void annuleren();
+    void annuleren(Bestelling bestelling);
 
     void betalen();
 

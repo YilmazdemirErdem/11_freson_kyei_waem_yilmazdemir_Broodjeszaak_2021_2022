@@ -41,7 +41,7 @@ public class Betaald implements BestellingState {
     }
 
     @Override
-    public void annuleren() {
+    public void annuleren(Bestelling bestelling) {
         throw new IllegalArgumentException("you can't do this function");
     }
 
