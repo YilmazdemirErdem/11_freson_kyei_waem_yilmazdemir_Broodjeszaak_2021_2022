@@ -80,8 +80,8 @@ public class BestelFacade implements Subject {
     public void berekenTotaalBedrag(String kortingsStrategie) {
         totalePrijs = bestelling.berekenTotaalBedrag(kortingsStrategie);
     }
-    public void berekenAantalInWachtrij(String kortingsStrategie) {
-        aantalBroodjesInWachtrij = 0;
+    public int getAantalInWachtrij() {
+        return aantalBroodjesInWachtrij;
     }
 
     public void betaalBestelling() {
@@ -90,6 +90,7 @@ public class BestelFacade implements Subject {
 
     public void zendNaarKeuken() {
         bestelling.naarKeuken();
+        //TODO: hier iets aanpassen?
     }
 
     public void notifyObservers(BestellingEvents bestellingEvents, int nrBestelling, int aantalBroodjes, double totalePrijs, int aantalBroodjesInWachtrij){

@@ -13,8 +13,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Bestellijn;
 import model.database.BelegDatabase;
 import view.panels.KitchenPane;
+
+import java.util.ArrayList;
 
 public class KeukenView {
 
@@ -49,13 +52,26 @@ public class KeukenView {
         main.getChildren().addAll(one, two);
 
         //TODO: Deze knoppen zijn alleen actief als er nog bestellingen in de wachtrij zitten.
-        Button volgendeKnop = new Button("Volgende Bestelling");
+        Button volgendeKnop = new Button("Volgende bestelling");
         volgendeKnop.setOnAction(event -> controller.volgendeKnopPressed());
+        volgendeKnop.setDisable(true);
         Button afgewerktKnop = new Button("Bestelling afgewerkt");
         afgewerktKnop.setOnAction(event -> controller.afgewerktKnopPressed());
+        afgewerktKnop.setDisable(true);
 
         // dynamisch bestellijnen inladen
+        ArrayList<Bestellijn> bestellijnen = controller.getLijstBestellijnen(); // [a, b, b, c, b, c] => [a, b, c, b, c]
+        for (Bestellijn bestellijn : bestellijnen) {
+            for (Bestellijn compare : bestellijnen) {
+                if (bestellijn.getBroodje() == compare.getBroodje() && bestellijn.getNamenBeleg() == compare.getNamenBeleg()) {
+                    bestellijnen.remove(bestellijn);
+                    break;
+                }
+            }
+        }
+
         //TODO ...
+
         return main;
     }
     public void setLabelAantalBestellingenInWachtrij(String s){

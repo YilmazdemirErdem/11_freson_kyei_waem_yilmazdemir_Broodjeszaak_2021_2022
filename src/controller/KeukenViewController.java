@@ -33,8 +33,8 @@ public class KeukenViewController implements Observer {
 
     //called by model
     @Override
-    public void update(int nrBestelling, int aantalBroodjes, double totalePrijs, int aantalBroodjesInWachtrij) {
-        keukenView.setLabelAantalBestellingenInWachtrij("Aantal bestellingen in de wachtrij: " + aantalBroodjesInWachtrij);
+    public void update(int nrBestelling, int aantalBroodjes, double totalePrijs, int aantalBestellingenInWachtrij) {
+        keukenView.setLabelAantalBestellingenInWachtrij("Aantal bestellingen in de wachtrij: " + aantalBestellingenInWachtrij);
         keukenView.setLabelAantalBroodjes("Aantal broodjes: " + aantalBroodjes);
         keukenView.setLabelVolgnr("Volgnummer bestelling: " + nrBestelling);
     }
@@ -46,5 +46,8 @@ public class KeukenViewController implements Observer {
 
     public void afgewerktKnopPressed() {
         //TODO: ??
+    }
+    public ArrayList<Bestellijn> getLijstBestellijnen(){
+        return bestelFacade.getLijstBestellijnen();
     }
 }
