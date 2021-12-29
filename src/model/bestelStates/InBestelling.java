@@ -6,6 +6,7 @@ import model.kortingStrategies.KortingStrategyFactory;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 
 public class InBestelling implements BestellingState {
     private Bestelling bestelling;
@@ -92,7 +93,7 @@ public class InBestelling implements BestellingState {
     }
 
     @Override
-    public void naar_keuken() {
+    public void naar_keuken(ArrayList<Bestelling> wachtrij, Bestelling bestelling) {
         throw new IllegalArgumentException("you can't do this function");
     }
 

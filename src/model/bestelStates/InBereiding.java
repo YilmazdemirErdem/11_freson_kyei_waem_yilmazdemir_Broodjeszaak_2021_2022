@@ -2,6 +2,8 @@ package model.bestelStates;
 
 import model.*;
 
+import java.util.ArrayList;
+
 public class InBereiding implements BestellingState {
     private Bestelling bestelling;
 
@@ -55,7 +57,7 @@ public class InBereiding implements BestellingState {
     }
 
     @Override
-    public void naar_keuken() {
+    public void naar_keuken(ArrayList<Bestelling> wachtrij, Bestelling bestelling) {
         throw new IllegalArgumentException("you can't do this function");
     }
 

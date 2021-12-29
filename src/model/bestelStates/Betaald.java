@@ -2,6 +2,8 @@ package model.bestelStates;
 
 import model.*;
 
+import java.util.ArrayList;
+
 public class Betaald implements BestellingState {
 
     private Bestelling bestelling;
@@ -56,8 +58,11 @@ public class Betaald implements BestellingState {
     }
 
     @Override
-    public void naar_keuken() {
+    public void naar_keuken(ArrayList<Bestelling> wachtrij, Bestelling bestelling) {
         bestelling.setState(bestelling.getInWachtrij());
+        wachtrij.add(bestelling);
+        //bestelling.getBestellijnen().clear();
+
     }
 
     @Override

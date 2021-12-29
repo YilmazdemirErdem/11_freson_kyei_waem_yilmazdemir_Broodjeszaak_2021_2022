@@ -5,6 +5,8 @@ import model.Bestellijn;
 import model.Bestelling;
 import model.Broodje;
 
+import java.util.ArrayList;
+
 public interface BestellingState {
 
     void maakNieuweBestelling();
@@ -25,7 +27,7 @@ public interface BestellingState {
 
     void startBereiding();
 
-    void naar_keuken();
+    void naar_keuken(ArrayList<Bestelling> wachtrij, Bestelling bestelling);
 
     void afgewerkt();
 

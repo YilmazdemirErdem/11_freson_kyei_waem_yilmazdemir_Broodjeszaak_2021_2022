@@ -42,7 +42,6 @@ public class BroodjesDatabase {
     public ArrayList<Broodje> getOpVoorraadLijstBroodjes() {
         ArrayList<Broodje> opVoorraadBroodjes = new ArrayList<>();
         for (Broodje broodje : broodjesMapToList()) {
-            System.out.println(broodje.getBroodjesStock());
             if (broodje.getBroodjesStock() > 0){
                 opVoorraadBroodjes.add(broodje);
             }

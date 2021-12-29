@@ -124,7 +124,7 @@ public class Bestelling {
         bestellingState.betalen();
     }
 
-    public void naarKeuken() {
-        bestellingState.naar_keuken();
+    public void naarKeuken(ArrayList<Bestelling> wachtrij, Bestelling bestelling) {
+        bestellingState.naar_keuken(wachtrij, bestelling);
     }
 }

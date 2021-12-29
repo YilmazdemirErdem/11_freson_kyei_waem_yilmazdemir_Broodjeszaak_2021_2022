@@ -16,6 +16,7 @@ public class BestelFacade implements Subject {
     private HashMap<BestellingEvents, ArrayList<Observer>> observerMap = new HashMap<>();
     private BroodjesDatabase broodjesDatabase = new BroodjesDatabase(LoadSaveStrategyEnum.TEKST);
     private BelegDatabase belegDatabase = new BelegDatabase(LoadSaveStrategyEnum.TEKST);
+    private ArrayList<Bestelling> wachtrij = new ArrayList<>();
     private Bestelling bestelling = new Bestelling();
 
     public BestelFacade() {
@@ -86,12 +87,13 @@ public class BestelFacade implements Subject {
     }
 
     public void zendNaarKeuken() {
-        bestelling.naarKeuken();
+        bestelling.naarKeuken(wachtrij, bestelling);
         //TODO: hier iets aanpassen?
     }
 
     public void notifyObservers(BestellingEvents bestellingEvents, int nrBestelling, int aantalBroodjes, double totalePrijs, int aantalBroodjesInWachtrij){
         for (Observer obs: observerMap.get(bestellingEvents)){
+            System.out.println(obs);
             obs.update(nrBestelling, aantalBroodjes, totalePrijs, aantalBroodjesInWachtrij);
         }
     }
@@ -100,6 +102,7 @@ public class BestelFacade implements Subject {
         nr_bestelling += nr_bestelling_extra;
         aantal_broodjes += aantal_broodjes_extra;
         aantalBroodjesInWachtrij += extra_inWachtrij;
+        System.out.println(extra_inWachtrij);
         notifyObservers(bestellingEvents, nr_bestelling, aantal_broodjes, totalePrijs, aantalBroodjesInWachtrij);
     }
 

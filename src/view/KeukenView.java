@@ -37,6 +37,7 @@ public class KeukenView {
         stage.setScene(scene);
         stage.sizeToScene();
         stage.show();
+        controller.setView(this);
     }
     private Pane createNodeHierarchy(KeukenViewController controller) {
         VBox one = new VBox(8);
@@ -74,13 +75,17 @@ public class KeukenView {
 
         return main;
     }
+
     public void setLabelAantalBestellingenInWachtrij(String s){
         aantal_bestellingen_in_wachtrij.setText(s);
     }
+
     public void setLabelVolgnr(String s){
         volgnr.setText(s);
     }
+
     public void setLabelAantalBroodjes(String s){
         aantal_broodjes.setText(s);
     }
+
 }
