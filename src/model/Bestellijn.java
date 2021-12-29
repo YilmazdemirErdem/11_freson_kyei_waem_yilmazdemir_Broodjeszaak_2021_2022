@@ -53,6 +53,7 @@ public class Bestellijn {
     public void voegBelegToe(BelegSoort belegSoort){
         this.belegSoorten.add(belegSoort);
         this.namenBeleg.add(belegSoort.getBelegNaam());
+        belegSoort.aanpassenVoorraad(1);
     }
 
     public double getPrijsBestellijn(){

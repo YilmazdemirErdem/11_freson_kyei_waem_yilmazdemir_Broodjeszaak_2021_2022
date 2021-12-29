@@ -38,6 +38,9 @@ public class BestelView {
     private Button betaal_button;
     private Button naar_keuken_button;
     private TableView bestellijnen;
+    private ListView listBroodjes;
+    private ListView listBeleg;
+    private ObservableList<BelegSoort> observableListBeleg;
     private ObservableList<Broodje> observableListBroodjes;
     private ObservableList<Bestellijn> observableListBestellijnen;
 
@@ -81,18 +84,24 @@ public class BestelView {
         one.getChildren().addAll(one_one, kortingKeuze);
 
         HBox two_one = new HBox(8);
-        for (Broodje broodje: controller.getOpVoorraadLijstBroodjes()) { //iteren over observableList van broodjes, iets fout met opstart daarna zou het moeten werken
+        listBroodjes = new ListView();
+        two_one.getChildren().addAll(listBroodjes);
+        /*ObservableList<Broodje> voorraadBroodjes = listBroodjes.getItems();
+        for (Broodje broodje: voorraadBroodjes) { //iteren over observableList van broodjes, iets fout met opstart daarna zou het moeten werken
+            System.out.println(broodje.getBroodjesNaam());
             Button button = new Button(broodje.getBroodjesNaam());
-            two_one.getChildren().addAll(button);
+            listBroodjes.getItems().add(button);
             button.setOnAction(event -> controller.broodjeButtonPressed(broodje));
-        }
+        }*/
 
         HBox two_two = new HBox(8);
-        for (BelegSoort belegSoort: controller.getOpVoorraadLijstBelegSoorten()) { //iteren over observableList van belegsoorten
+        listBeleg = new ListView();
+        two_two.getChildren().addAll(listBeleg);
+        /*for (BelegSoort belegSoort: controller.getOpVoorraadLijstBelegSoorten()) { //iteren over observableList van belegsoorten
             Button button = new Button(belegSoort.getBelegNaam());
             two_two.getChildren().addAll(button);
             button.setOnAction(event -> controller.belegButtonPressed(belegSoort));
-        }
+        }*/
 
         VBox two = new VBox(8);
         two.setPadding(new Insets(10));
@@ -171,6 +180,24 @@ public class BestelView {
 
     public void updateBroodjesStatusKnoppen(BestelViewController controller){
         observableListBroodjes = FXCollections.observableArrayList(controller.getOpVoorraadLijstBroodjes());
+        listBroodjes.getItems().clear();
+        for (Broodje broodje: observableListBroodjes) { //iteren over observableList van broodjes, iets fout met opstart daarna zou het moeten werken
+            Button button = new Button(broodje.getBroodjesNaam());
+            listBroodjes.getItems().add(button);
+            button.setOnAction(event -> controller.broodjeButtonPressed(broodje));
+        }
+        listBroodjes.refresh();
+    }
+
+    public void updateBelegStatusKnoppen(BestelViewController controller){
+        observableListBeleg = FXCollections.observableArrayList(controller.getOpVoorraadLijstBelegSoorten());
+        listBeleg.getItems().clear();
+        for (BelegSoort belegSoort: observableListBeleg) { //iteren over observableList van broodjes, iets fout met opstart daarna zou het moeten werken
+            Button button = new Button(belegSoort.getBelegNaam());
+            listBeleg.getItems().add(button);
+            button.setOnAction(event -> controller.belegButtonPressed(belegSoort));
+        }
+        listBroodjes.refresh();
     }
 
     public void updateStatusInWachtKnoppen(Boolean status){

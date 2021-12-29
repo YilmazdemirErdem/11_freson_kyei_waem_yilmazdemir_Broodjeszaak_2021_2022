@@ -43,9 +43,7 @@ public class BroodjesDatabase {
         ArrayList<Broodje> opVoorraadBroodjes = new ArrayList<>();
         for (Broodje broodje : broodjesMapToList()) {
             if (broodje.getBroodjesStock() > 0){
-                System.out.println(broodje.getBroodjesStock());
                 opVoorraadBroodjes.add(broodje);
-                System.out.println(broodje);
             }
         }
         return opVoorraadBroodjes;

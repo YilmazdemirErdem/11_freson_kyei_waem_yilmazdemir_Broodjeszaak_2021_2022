@@ -37,7 +37,7 @@ public class BelegDatabase {
     public ArrayList<BelegSoort> getOpVoorraadLijstBelegSoorten() {
         ArrayList<BelegSoort> opVoorraadBelegSoorten = new ArrayList<>();
         for (BelegSoort belegSoort : belegSoortMapToList()) {
-            if (belegSoort.getBelegStock() != 0){
+            if (belegSoort.getBelegStock() > 0){
                 opVoorraadBelegSoorten.add(belegSoort);
             }
         }

@@ -41,18 +41,16 @@ public class BestelViewController implements Observer {
         return bestelFacade.getOpVoorraadLijstBelegSoorten();
     }
 
-    public void toevoegenBroodje(Broodje broodje){
-        bestelFacade.toevoegenBroodje(broodje);
-    }
-
     public ArrayList<Bestellijn> getLijstBestellijnen(){
         return bestelFacade.getLijstBestellijnen();
     }
 
     public void nieuweBestellingButtonPressed() {
         bestelFacade.nieuweBestelling();
-        bestelFacade.updateBy(BestellingEvents.NIEUWE_BESTELLING, 1,0, 0);
+        bestelView.updateBroodjesStatusKnoppen(this);
+        bestelView.updateBelegStatusKnoppen(this);
         bestelView.updateStatusInBestellingKnoppen(false);
+        bestelFacade.updateBy(BestellingEvents.NIEUWE_BESTELLING, 1,0, 0);
     }
 
     public void broodjeButtonPressed(Broodje broodje) {
@@ -69,6 +67,7 @@ public class BestelViewController implements Observer {
         }else{
             bestelFacade.toevoegenBeleg(bestellijn, belegSoort);
             bestelView.updateBestelijnen(this);
+            bestelView.updateBelegStatusKnoppen(this);
             bestelFacade.updateBy(BestellingEvents.TOEVOEGEN_BELEG, 0, 0, 0);
         }
     }

@@ -44,4 +44,8 @@ public class BelegSoort {
     public void setAantalBelegVerkocht(int aantalBelegVerkocht) {
         this.aantalBelegVerkocht = aantalBelegVerkocht;
     }
+
+    public void aanpassenVoorraad(int aantal) {
+        setBelegStock(this.belegStock - aantal);
+    }
 }
