@@ -1,22 +1,23 @@
 package view;
 
-import controller.BestelViewController;
 import controller.KeukenViewController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.BelegSoort;
 import model.Bestellijn;
 import model.Bestelling;
-import model.database.BelegDatabase;
-import view.panels.KitchenPane;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,8 @@ public class KeukenView {
     private Label volgnr = new Label("Volgnummer bestelling: 0");
     private Label streepje = new Label("–");
     private Label aantal_broodjes = new Label("Aantal Broodjes: 0");
+    private TableView bestellijnen;
+    private ObservableList<Bestellijn> observableListBestellijnen;
 
     public KeukenView(KeukenViewController controller){
         stage.setTitle("KITCHEN VIEW");
@@ -62,24 +65,31 @@ public class KeukenView {
 
         buttonBox.getChildren().addAll(volgendeKnop);
         buttonBox.getChildren().addAll(afgewerktKnop);
-        //TODO ...
-        // dynamisch bestellijnen inladen
-        /*ArrayList<Bestellijn> bestellijnen = controller.getLijstBestellijnen(); // [a, b, b, c, b, c] => [a, b, c, b, c]
-        for (Bestellijn bestellijn : bestellijnen) {
-            for (Bestellijn compare : bestellijnen) {
-                if (bestellijn.getBroodje() == compare.getBroodje() && bestellijn.getNamenBeleg() == compare.getNamenBeleg()) {
-                    bestellijnen.remove(bestellijn);
-                    break;
-                }
-            }
-        }*/
+
+        HBox four = new HBox(8);
+        bestellijnen = new TableView();
+        TableColumn<Bestellijn, String> colBroodjesNaam = new TableColumn<Bestellijn, String>("Broodjes");
+        colBroodjesNaam.setMinWidth(100);
+        colBroodjesNaam.setCellValueFactory(new PropertyValueFactory<Bestellijn, String>("naamBroodje"));
+        TableColumn<BelegSoort, ArrayList<String>> colBelegNaam = new TableColumn<BelegSoort, ArrayList<String>>("Beleg");
+        colBelegNaam.setMinWidth(250);
+        colBelegNaam.setCellValueFactory(new PropertyValueFactory<BelegSoort, ArrayList<String>>("namenBeleg"));
+        bestellijnen.getColumns().addAll(colBroodjesNaam,colBelegNaam);
+        four.getChildren().addAll(bestellijnen);
 
 
         VBox main = new VBox(8);
         main.setPadding(new Insets(10));
-        main.getChildren().addAll(one, two, buttonBox);
+        main.getChildren().addAll(one, two, buttonBox, four);
 
         return main;
+    }
+
+    public void updateBestellijnen(KeukenViewController controller){
+        ArrayList<Bestellijn> arrayList = controller.getLijstBestellijnen();
+        observableListBestellijnen = FXCollections.observableArrayList(arrayList);
+        bestellijnen.setItems(observableListBestellijnen);
+        bestellijnen.refresh();
     }
 
     public void setLabelAantalBestellingenInWachtrij(String s){
@@ -92,9 +102,5 @@ public class KeukenView {
 
     public void setLabelAantalBroodjes(String s){
         aantal_broodjes.setText(s);
-    }
-    
-    public void showVolgendeBestelling(Bestelling bestelling) {
-        System.out.println(bestelling);
     }
 }

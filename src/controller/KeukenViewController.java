@@ -11,6 +11,7 @@ public class KeukenViewController implements Observer {
     private KeukenView keukenView;
     private BestelFacade bestelFacade;
     private ArrayList<Bestelling> wachtrij; // of BestelLijn
+    private int aantalInWachtrij = 0;
 
     public KeukenViewController(BestelFacade bestelFacade) {
         setBestelFacade(bestelFacade);
@@ -35,21 +36,25 @@ public class KeukenViewController implements Observer {
     @Override
     public void update(int nrBestelling, int aantalBroodjes, double totalePrijs, int aantalBestellingenInWachtrij) {
         System.out.println("aantalBestellingenInWachtrij: " + aantalBestellingenInWachtrij);
+        aantalInWachtrij = aantalBestellingenInWachtrij;
         keukenView.setLabelAantalBestellingenInWachtrij("Aantal bestellingen in de wachtrij: " + aantalBestellingenInWachtrij);
         keukenView.setLabelAantalBroodjes("Aantal broodjes: " + aantalBroodjes);
         keukenView.setLabelVolgnr("Volgnummer bestelling: " + nrBestelling);
+        if (aantalBestellingenInWachtrij == 1) {
+            keukenView.updateBestellijnen(this);
+        }
     }
 
     public void volgendeKnopPressed() {
         //TODO: Indien men klikt op de “Volgende bestelling” knop wordt de eerst toegevoegde bestelling uit de wachtrij verwijderd en getoond.
         bestelFacade.getKeukenBestellingen().remove(0);
-        Bestelling bestelling = new Bestelling();
-        System.out.println("retainAll(): " + bestelFacade.getKeukenBestellingen().get(0).retainAll());
-        keukenView.showVolgendeBestelling(bestelling);
+        keukenView.updateBestellijnen(this);
+        bestelFacade.updateBy(BestellingEvents.VERWIJDER_BROODJE, 0,0, aantalInWachtrij-1); //TODO: klopt dit??
     }
 
     public void afgewerktKnopPressed() {
         //TODO: ??
+        bestelFacade.updateBy(BestellingEvents.AFGEWERKT, 0,0, aantalInWachtrij);
     }
     public ArrayList<Bestellijn> getLijstBestellijnen(){
         return bestelFacade.getLijstBestellijnen();
