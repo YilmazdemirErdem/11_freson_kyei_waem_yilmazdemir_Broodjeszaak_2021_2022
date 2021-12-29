@@ -151,7 +151,7 @@ public class BestelView {
         betaal_button.setOnAction(event -> controller.betaalBestelling());
         naar_keuken_button = new Button("Naar Keuken");
         naar_keuken_button.setDisable(true);
-        naar_keuken_button.setOnAction(event -> controller.zendNaarKeukenBestelling());
+        naar_keuken_button.setOnAction(event -> controller.zendNaarKeukenBestelling(bestellijnen.getItems()));
         five_two.getChildren().addAll(betaal_button, naar_keuken_button);
 
         HBox five = new HBox(8);

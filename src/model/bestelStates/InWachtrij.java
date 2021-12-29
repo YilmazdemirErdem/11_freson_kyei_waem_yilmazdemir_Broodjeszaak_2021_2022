@@ -56,7 +56,7 @@ public class InWachtrij implements BestellingState {
 
     @Override
     public void naar_keuken() {
-        throw new IllegalArgumentException("you can't do this function");
+        bestelling.setState(bestelling.getInWachtrij());
     }
 
     @Override

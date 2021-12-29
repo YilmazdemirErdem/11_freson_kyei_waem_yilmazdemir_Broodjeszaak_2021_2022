@@ -41,6 +41,7 @@ public class KeukenViewController implements Observer {
 
     public void volgendeKnopPressed() {
         //TODO: Indien men klikt op de “Volgende bestelling” knop wordt de eerst toegevoegde bestelling uit de wachtrij verwijderd en getoond.
+        bestelFacade.getKeukenBestellingen();
         wachtrij.remove(0); //?? & tonen
     }
 
