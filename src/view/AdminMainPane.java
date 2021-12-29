@@ -1,6 +1,7 @@
 package view;
 
 
+import controller.BroodjesViewController;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
