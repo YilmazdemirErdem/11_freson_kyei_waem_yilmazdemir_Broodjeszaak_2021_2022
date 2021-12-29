@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Bestellijn;
+import model.Bestelling;
 import model.database.BelegDatabase;
 import view.panels.KitchenPane;
 
@@ -54,13 +55,14 @@ public class KeukenView {
         //TODO: Deze knoppen zijn alleen actief als er nog bestellingen in de wachtrij zitten.
         Button volgendeKnop = new Button("Volgende bestelling");
         volgendeKnop.setOnAction(event -> controller.volgendeKnopPressed());
-        volgendeKnop.setDisable(true);
+        volgendeKnop.setDisable(false);
         Button afgewerktKnop = new Button("Bestelling afgewerkt");
         afgewerktKnop.setOnAction(event -> controller.afgewerktKnopPressed());
         afgewerktKnop.setDisable(true);
 
         buttonBox.getChildren().addAll(volgendeKnop);
         buttonBox.getChildren().addAll(afgewerktKnop);
+        //TODO ...
         // dynamisch bestellijnen inladen
         /*ArrayList<Bestellijn> bestellijnen = controller.getLijstBestellijnen(); // [a, b, b, c, b, c] => [a, b, c, b, c]
         for (Bestellijn bestellijn : bestellijnen) {
@@ -72,7 +74,7 @@ public class KeukenView {
             }
         }*/
 
-        //TODO ...
+
         VBox main = new VBox(8);
         main.setPadding(new Insets(10));
         main.getChildren().addAll(one, two, buttonBox);
@@ -91,5 +93,8 @@ public class KeukenView {
     public void setLabelAantalBroodjes(String s){
         aantal_broodjes.setText(s);
     }
-
+    
+    public void showVolgendeBestelling(Bestelling bestelling) {
+        System.out.println(bestelling);
+    }
 }
