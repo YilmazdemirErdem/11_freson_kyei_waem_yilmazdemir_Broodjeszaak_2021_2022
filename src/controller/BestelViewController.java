@@ -76,7 +76,15 @@ public class BestelViewController implements Observer {
         Bestellijn bestellijn = bestelView.getSelectedBestellijn();
         if(bestellijn == null){
             bestelView.foutMelding("Onbestaande bestellijn", "Je kan geen bestellijn kopiëren of toevoegen zonder een bestellijn geselecteerd te hebben!");
-        }else{
+        }
+        if (bestellijn.getBroodje().getBroodjesStock() <= 0){
+            bestelView.foutMelding("Broodje niet voorraad op", "Het broodje dat je wilt toevoegen is niet meer op voorrraad");
+        }
+        for (BelegSoort belegSoort : bestellijn.getBelegSoort())
+            if (belegSoort.getBelegStock() <= 0){
+                bestelView.foutMelding("Beleg niet voorraad op", "Er is beleg op het broodje dat je wilt toevoegen dat niet meer op voorrraad");
+            }
+        else{
             bestelFacade.voegZelfdeToe(bestellijn);
             bestelView.updateBestelijnen(this);
             bestelFacade.updateBy(BestellingEvents.TOEVOEGEN_IDENTIEK_BROODJE, 0, 1, 0);
