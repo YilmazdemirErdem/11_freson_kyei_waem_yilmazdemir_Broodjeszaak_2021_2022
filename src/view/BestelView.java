@@ -202,6 +202,8 @@ public class BestelView {
 
     public void updateStatusInWachtKnoppen(Boolean status){
         // broodjes, beleg, verwijder, dezelfde, annuleer, afsluiten knoppen
+        listBroodjes.setDisable(!status);
+        listBeleg.setDisable(!status);
         nieuwe_bestelling_button.setDisable(status);
         kortingKeuze.setDisable(!status);
         verwijder_broodje_button.setDisable(!status);
@@ -214,6 +216,8 @@ public class BestelView {
 
     public void updateStatusInBestellingKnoppen(Boolean status){
         // broodjes, beleg, verwijder, dezelfde, annuleer, afsluiten knoppen
+        listBroodjes.setDisable(status);
+        listBeleg.setDisable(status);
         nieuwe_bestelling_button.setDisable(!status);
         kortingKeuze.setDisable(status);
         verwijder_broodje_button.setDisable(status);
@@ -226,6 +230,8 @@ public class BestelView {
 
     public void updateStatusInAfgeslotenKnoppen(Boolean status){
         // broodjes, beleg, verwijder, dezelfde, annuleer, afsluiten knoppen
+        listBroodjes.setDisable(!status);
+        listBeleg.setDisable(!status);
         nieuwe_bestelling_button.setDisable(!status);
         kortingKeuze.setDisable(!status);
         verwijder_broodje_button.setDisable(!status);
@@ -238,6 +244,8 @@ public class BestelView {
 
     public void updateStatusInBetaaldKnoppen(Boolean status){
         // broodjes, beleg, verwijder, dezelfde, annuleer, afsluiten knoppen
+        listBroodjes.setDisable(!status);
+        listBeleg.setDisable(!status);
         nieuwe_bestelling_button.setDisable(!status);
         kortingKeuze.setDisable(!status);
         verwijder_broodje_button.setDisable(!status);
