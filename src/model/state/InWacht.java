@@ -16,8 +16,7 @@ public class InWacht implements BestellingState {
 
     @Override
     public void annuleren(Bestelling bestelling) {
-        bestelling.getBestellijnen().clear();
-        this.bestelling.setState(this.bestelling.getInWacht());
+        throw new IllegalArgumentException("you can't do this function");
     }
 
     @Override

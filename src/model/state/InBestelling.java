@@ -26,6 +26,10 @@ public class InBestelling implements BestellingState {
 
     @Override
     public void verwijderBroodje(Bestellijn bestellijn) {
+        bestellijn.getBroodje().aanpassenVoorraad(1);
+        for (BelegSoort belegSoort: bestellijn.getBelegSoort()){
+            belegSoort.aanpassenVoorraad(1);
+        }
         bestelling.getBestellijnen().remove(bestellijn);
     }
 
@@ -63,6 +67,12 @@ public class InBestelling implements BestellingState {
 
     @Override
     public void annuleren(Bestelling bestelling) {
+        for (Bestellijn bestellijn: bestelling.getBestellijnen()) {
+            bestellijn.getBroodje().aanpassenVoorraad(1);
+            for (BelegSoort belegSoort: bestellijn.getBelegSoort()){
+                belegSoort.aanpassenVoorraad(1);
+            }
+        }
         bestelling.getBestellijnen().clear();
         this.bestelling.setState(this.bestelling.getInWacht());
     }

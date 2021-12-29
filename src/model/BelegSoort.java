@@ -46,6 +46,6 @@ public class BelegSoort {
     }
 
     public void aanpassenVoorraad(int aantal) {
-        setBelegStock(this.belegStock - aantal);
+        setBelegStock(this.belegStock + aantal);
     }
 }

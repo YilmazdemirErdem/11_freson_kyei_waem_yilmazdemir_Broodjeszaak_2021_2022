@@ -97,6 +97,8 @@ public class BestelViewController implements Observer {
             bestelView.foutMelding("Onbestaande bestellijn", "Je kan geen bestellijn verwijderen zonder een bestellijn geselecteerd te hebben!");
         }else{
             bestelFacade.verwijderBestellijn(bestellijn);
+            bestelView.updateBroodjesStatusKnoppen(this);
+            bestelView.updateBelegStatusKnoppen(this);
             bestelView.updateBestelijnen(this);
             bestelFacade.updateBy(BestellingEvents.VERWIJDER_BROODJE, 0, -1, 0);
         }

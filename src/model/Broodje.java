@@ -51,6 +51,6 @@ public class Broodje {
     }
 
     public void aanpassenVoorraad(int aantal){
-        setBroodjesStock(this.broodjesStock - aantal);
+        setBroodjesStock(this.broodjesStock + aantal);
     }
 }

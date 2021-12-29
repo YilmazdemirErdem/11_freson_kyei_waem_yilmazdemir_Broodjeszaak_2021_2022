@@ -15,7 +15,7 @@ public class Bestellijn {
         setBroodje(broodje);
         this.belegSoorten = new ArrayList<>();
         this.namenBeleg = new ArrayList<>();
-        broodje.aanpassenVoorraad(1);
+        broodje.aanpassenVoorraad(-1);
     }
 
     public Broodje getBroodje() {
@@ -53,7 +53,7 @@ public class Bestellijn {
     public void voegBelegToe(BelegSoort belegSoort){
         this.belegSoorten.add(belegSoort);
         this.namenBeleg.add(belegSoort.getBelegNaam());
-        belegSoort.aanpassenVoorraad(1);
+        belegSoort.aanpassenVoorraad(-1);
     }
 
     public double getPrijsBestellijn(){
