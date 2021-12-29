@@ -1,6 +1,7 @@
 package model;
 
 import model.bestelStates.*;
+import model.database.BroodjesDatabase;
 
 import java.util.ArrayList;
 
@@ -101,7 +102,7 @@ public class Bestelling {
         bestellingState.betalen();
     }
 
-    public void naarKeuken(ArrayList<Bestelling> wachtrij, Bestelling bestelling) {
-        bestellingState.naar_keuken(wachtrij, bestelling);
+    public void naarKeuken(ArrayList<Bestelling> wachtrij, Bestelling bestelling, BroodjesDatabase broodjesDatabase) {
+        bestellingState.naar_keuken(wachtrij, bestelling, broodjesDatabase);
     }
 }

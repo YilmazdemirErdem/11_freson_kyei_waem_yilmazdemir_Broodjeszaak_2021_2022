@@ -4,6 +4,7 @@ import model.BelegSoort;
 import model.Bestellijn;
 import model.Bestelling;
 import model.Broodje;
+import model.database.BroodjesDatabase;
 
 import java.util.ArrayList;
 
@@ -31,7 +32,7 @@ public interface BestellingState {
 
     void startBereiding();
 
-    void naar_keuken(ArrayList<Bestelling> wachtrij, Bestelling bestelling);
+    void naar_keuken(ArrayList<Bestelling> wachtrij, Bestelling bestelling, BroodjesDatabase broodjesDatabase);
 
     void afgewerkt();
 

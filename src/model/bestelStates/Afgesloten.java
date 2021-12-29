@@ -1,6 +1,7 @@
 package model.bestelStates;
 
 import model.*;
+import model.database.BroodjesDatabase;
 
 import java.util.ArrayList;
 
@@ -68,7 +69,7 @@ public class Afgesloten implements BestellingState {
     }
 
     @Override
-    public void naar_keuken(ArrayList<Bestelling> wachtrij, Bestelling bestelling) {
+    public void naar_keuken(ArrayList<Bestelling> wachtrij, Bestelling bestelling, BroodjesDatabase broodjesDatabase) {
         throw new IllegalArgumentException("you can't do this function");
     }
 

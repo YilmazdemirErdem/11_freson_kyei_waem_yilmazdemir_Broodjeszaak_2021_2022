@@ -1,6 +1,8 @@
 package model.bestelStates;
 
 import model.*;
+import model.database.BroodjesDatabase;
+import model.database.loadSaveStrategies.LoadSaveStrategyEnum;
 
 import java.util.ArrayList;
 
@@ -62,9 +64,10 @@ public class Betaald implements BestellingState {
     }
 
     @Override
-    public void naar_keuken(ArrayList<Bestelling> wachtrij, Bestelling bestelling) {
+    public void naar_keuken(ArrayList<Bestelling> wachtrij, Bestelling bestelling, BroodjesDatabase broodjesDatabase) {
         bestelling.setState(bestelling.getInWachtrij());
         wachtrij.add(bestelling);
+        broodjesDatabase.save(LoadSaveStrategyEnum.TEKST);
     }
 
     @Override

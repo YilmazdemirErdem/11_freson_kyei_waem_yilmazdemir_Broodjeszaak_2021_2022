@@ -15,13 +15,14 @@ import view.panels.BroodjesBelegOverviewPane;
  */
 
 public class AdminMainPane extends BorderPane {
+    BroodjesBelegOverviewPane broodjesBelegOverviewPane;
 
     public AdminMainPane() {
-        BroodjesDatabase broodjesDatabase = new BroodjesDatabase(LoadSaveStrategyEnum.EXCEL);
+        BroodjesDatabase broodjesDatabase = new BroodjesDatabase(LoadSaveStrategyEnum.TEKST);
         BelegDatabase belegDatabase = new BelegDatabase(LoadSaveStrategyEnum.TEKST);
 
         TabPane tabPane = new TabPane();
-        BroodjesBelegOverviewPane broodjesBelegOverviewPane = new BroodjesBelegOverviewPane(broodjesDatabase, belegDatabase);
+        broodjesBelegOverviewPane = new BroodjesBelegOverviewPane(broodjesDatabase, belegDatabase);
         AdminInstellingenPane adminInstellingenPane = new AdminInstellingenPane(broodjesDatabase, belegDatabase);
         Tab broodjesTab = new Tab("Broodjes/Beleg", broodjesBelegOverviewPane);
         Tab instellingTab = new Tab("Instellingen", adminInstellingenPane);
@@ -30,6 +31,10 @@ public class AdminMainPane extends BorderPane {
         tabPane.getTabs().add(statistiekTab);
         tabPane.getTabs().add(instellingTab);
         this.setCenter(tabPane);
+    }
+
+    public void refresh(){
+        broodjesBelegOverviewPane.refresh();
     }
 }
 

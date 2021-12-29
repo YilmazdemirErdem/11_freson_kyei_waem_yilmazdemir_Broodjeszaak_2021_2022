@@ -34,6 +34,17 @@ public class BelegDatabase {
         }
     }
 
+    public void save(LoadSaveStrategyEnum loadSaveStrategyEnum) {
+        File file = new File("src/bestanden/beleg.txt");
+        File file2 = new File("src/bestanden/beleg.xls");
+        LoadSaveStrategyFactory loadSaveStrategyFactory = LoadSaveStrategyFactory.getInstance();
+        if (loadSaveStrategyEnum == LoadSaveStrategyEnum.EXCEL){
+            loadSaveStrategyFactory.createBelegSoortLoadSaveStrategy(loadSaveStrategyEnum).save(file2, belegMap);
+        } else {
+            loadSaveStrategyFactory.createBelegSoortLoadSaveStrategy(loadSaveStrategyEnum).save(file, belegMap);
+        }
+    }
+
     public List<BelegSoort> belegSoortMapToList(){
         return new ArrayList<>(this.belegMap.values());
     }

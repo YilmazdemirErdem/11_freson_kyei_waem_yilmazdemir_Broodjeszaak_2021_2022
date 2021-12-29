@@ -31,6 +31,7 @@ public class BroodjesTekstLoadSaveStrategy extends TekstLoadSaveTemplate impleme
         Broodje broodje = ((Broodje) object);
         outputLijn = broodje.getBroodjesNaam() + "," + broodje.getBroodjesPrijs() + ","
                 + broodje.getBroodjesStock() + "," + broodje.getAantalBroodjesVerkocht();
+        System.out.println(outputLijn);
         return outputLijn;
     }
 }

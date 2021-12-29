@@ -45,6 +45,7 @@ public class BestelFacade implements Subject {
     }
 
     public void nieuweBestelling() {
+        this.setBestelling();
         bestelling.nieuweBestelling(bestelling);
     }
 
@@ -84,6 +85,7 @@ public class BestelFacade implements Subject {
     public void berekenTotaalBedrag(String kortingsStrategie) {
         totalePrijs = bestelling.berekenTotaalBedrag(kortingsStrategie);
     }
+
     public int getAantalInWachtrij() {
         return aantalBestellingenInWachtrij;
     }
@@ -93,7 +95,7 @@ public class BestelFacade implements Subject {
     }
 
     public void zendNaarKeuken(ObservableList items) {
-        bestelling.naarKeuken(wachtrij, bestelling);
+        bestelling.naarKeuken(wachtrij, bestelling, broodjesDatabase);
         //TODO: hier iets aanpassen?
         keukenBestellingen.add(items);
     }

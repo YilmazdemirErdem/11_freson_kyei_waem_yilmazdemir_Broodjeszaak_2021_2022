@@ -31,6 +31,17 @@ public class BroodjesDatabase {
         }
     }
 
+    public void save(LoadSaveStrategyEnum loadSaveStrategyEnum) {
+        File file = new File("src/bestanden/broodjes.txt");
+        File file2 = new File("src/bestanden/broodjes.xls");
+        LoadSaveStrategyFactory loadSaveStrategyFactory = LoadSaveStrategyFactory.getInstance();
+        if (loadSaveStrategyEnum == LoadSaveStrategyEnum.EXCEL){
+            loadSaveStrategyFactory.createBroodjesLoadSaveStrategy(loadSaveStrategyEnum).save(file2, broodjesMap);
+        } else {
+            loadSaveStrategyFactory.createBroodjesLoadSaveStrategy(loadSaveStrategyEnum).save(file, broodjesMap);
+        }
+    }
+
     public ArrayList<Broodje> broodjesMapToList(){
         return new ArrayList<>(this.broodjesMap.values());
     }
