@@ -31,10 +31,6 @@ public class BroodjesViewController implements Observer {
         this.adminView = view;
     }
 
-    public void setView(BroodjesBelegOverviewPane broodjesBelegOverviewPane){
-        this.broodjesBelegOverviewPane = broodjesBelegOverviewPane;
-    }
-
     @Override
     public void update(int nrBestelling, int aantalBroodjes, double totalePrijs, int aantalBroodjesInWachtrij) {
         adminView.refresh();
