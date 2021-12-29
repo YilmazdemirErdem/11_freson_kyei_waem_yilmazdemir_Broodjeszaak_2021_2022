@@ -13,7 +13,7 @@ import javafx.stage.StageStyle;
 
 public class AdminView {
     private Stage stage = new Stage();
-    AdminMainPane borderPane;
+    private AdminMainPane borderPane;
 
     public AdminView(BroodjesViewController broodjesViewController) {
         stage.setTitle("ADMIN VIEW");
@@ -22,7 +22,7 @@ public class AdminView {
         stage.setY(20);
         Group root = new Group();
         Scene scene = new Scene(root, 650, 400);
-        BorderPane borderPane = new AdminMainPane();
+        borderPane = new AdminMainPane();
         borderPane.prefHeightProperty().bind(scene.heightProperty());
         borderPane.prefWidthProperty().bind(scene.widthProperty());
         root.getChildren().add(borderPane);
