@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public interface BestellingState {
 
-    void maakNieuweBestelling();
+    void maakNieuweBestelling(Bestelling bestelling);
 
     void voegBestellijnToe(Broodje broodje);
 

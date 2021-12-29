@@ -65,8 +65,8 @@ public class Bestelling {
         this.bestellingState = bestellingState;
     }
 
-    public void nieuweBestelling() {
-       bestellingState.maakNieuweBestelling();
+    public void nieuweBestelling(Bestelling bestelling) {
+       bestellingState.maakNieuweBestelling(bestelling);
     }
 
     public void toevoegenBroodje(Broodje broodje){

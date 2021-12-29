@@ -13,7 +13,7 @@ public class Betaald implements BestellingState {
     }
 
     @Override
-    public void maakNieuweBestelling() {
+    public void maakNieuweBestelling(Bestelling bestelling) {
         throw new IllegalArgumentException("you can't do this function");
     }
 
@@ -62,7 +62,6 @@ public class Betaald implements BestellingState {
         bestelling.setState(bestelling.getInWachtrij());
         wachtrij.add(bestelling);
         //bestelling.getBestellijnen().clear();
-
     }
 
     @Override

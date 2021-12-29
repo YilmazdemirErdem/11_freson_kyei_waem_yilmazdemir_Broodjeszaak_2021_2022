@@ -12,8 +12,8 @@ public class InWachtrij implements BestellingState {
     }
 
     @Override
-    public void maakNieuweBestelling() {
-        bestelling.setState(bestelling.getInBestelling());
+    public void maakNieuweBestelling(Bestelling bestelling) {
+        this.bestelling.setState(this.bestelling.getInBestelling());
     }
 
     @Override

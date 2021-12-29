@@ -16,7 +16,7 @@ public class InBestelling implements BestellingState {
     }
 
     @Override
-    public void maakNieuweBestelling() {
+    public void maakNieuweBestelling(Bestelling bestelling) {
         throw new IllegalArgumentException("you can't do this function");
     }
 

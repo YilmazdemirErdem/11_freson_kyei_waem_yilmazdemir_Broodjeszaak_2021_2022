@@ -12,7 +12,7 @@ public class InWacht implements BestellingState {
     }
 
     @Override
-    public void maakNieuweBestelling() {
+    public void maakNieuweBestelling(Bestelling bestelling) {
         bestelling.setState(bestelling.getInBestelling());
     }
 

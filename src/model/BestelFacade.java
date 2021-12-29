@@ -19,14 +19,19 @@ public class BestelFacade implements Subject {
     private BroodjesDatabase broodjesDatabase = new BroodjesDatabase(LoadSaveStrategyEnum.TEKST);
     private BelegDatabase belegDatabase = new BelegDatabase(LoadSaveStrategyEnum.TEKST);
     private ArrayList<Bestelling> wachtrij = new ArrayList<>();
-    private Bestelling bestelling = new Bestelling();
+    private Bestelling bestelling;
 
     public BestelFacade() {
         initiateObserverMap();
+        setBestelling();
     }
 
     public Bestelling getBestelling() {
         return bestelling;
+    }
+
+    public void setBestelling() {
+        this.bestelling = new Bestelling();
     }
 
     private void initiateObserverMap() {
@@ -36,7 +41,7 @@ public class BestelFacade implements Subject {
     }
 
     public void nieuweBestelling() {
-         bestelling.nieuweBestelling();
+        bestelling.nieuweBestelling(bestelling);
     }
 
     public void toevoegenBroodje(Broodje broodje){
