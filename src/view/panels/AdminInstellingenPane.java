@@ -27,12 +27,9 @@ public class AdminInstellingenPane extends GridPane {
         Label huidigeFormaatLabel = new Label("Huidige gegevens Formaat: xxx");
         Label formaatLabel = new Label("Gegevens Formaat");
 
-        VBox one_one = new VBox(8);
         ChoiceBox<String> formaatKeuze = new ChoiceBox<>();
         formaatKeuze.getItems().addAll("Excel", "Tekst");
-        one_one.setSpacing(125);
-        one.getChildren().addAll(huidigeFormaatLabel, formaatLabel);
-        one.getChildren().addAll(one_one);
+        one.getChildren().addAll(huidigeFormaatLabel, formaatLabel, formaatKeuze);
 
 
         VBox two = new VBox(8);
