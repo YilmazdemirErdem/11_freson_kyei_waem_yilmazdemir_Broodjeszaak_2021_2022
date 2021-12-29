@@ -7,6 +7,7 @@ import javafx.scene.layout.BorderPane;
 import model.database.BelegDatabase;
 import model.database.BroodjesDatabase;
 import model.database.loadSaveStrategies.LoadSaveStrategyEnum;
+import view.panels.AdminInstellingenPane;
 import view.panels.BroodjesBelegOverviewPane;
 
 /**
@@ -21,8 +22,9 @@ public class AdminMainPane extends BorderPane {
 
         TabPane tabPane = new TabPane();
         BroodjesBelegOverviewPane broodjesBelegOverviewPane = new BroodjesBelegOverviewPane(broodjesDatabase, belegDatabase);
+        AdminInstellingenPane adminInstellingenPane = new AdminInstellingenPane(broodjesDatabase, belegDatabase);
         Tab broodjesTab = new Tab("Broodjes/Beleg", broodjesBelegOverviewPane);
-        Tab instellingTab = new Tab("Instellingen");
+        Tab instellingTab = new Tab("Instellingen", adminInstellingenPane);
         Tab statistiekTab = new Tab("Statistieken");
         tabPane.getTabs().add(broodjesTab);
         tabPane.getTabs().add(statistiekTab);
