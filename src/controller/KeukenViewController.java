@@ -43,18 +43,31 @@ public class KeukenViewController implements Observer {
         if (aantalBestellingenInWachtrij == 1) {
             keukenView.updateBestellijnen(this);
         }
+        if (aantalBestellingenInWachtrij > 0) {
+            keukenView.enableVolgendeKnop(false);
+        } else if (aantalBestellingenInWachtrij == 0) {
+            keukenView.enableAfgewerktKnop(false);
+        }
     }
 
     public void volgendeKnopPressed() {
-        //TODO: Indien men klikt op de “Volgende bestelling” knop wordt de eerst toegevoegde bestelling uit de wachtrij verwijderd en getoond.
-        bestelFacade.getKeukenBestellingen().remove(0);
-        keukenView.updateBestellijnen(this);
-        bestelFacade.updateBy(BestellingEvents.VERWIJDER_BROODJE, 0,0, aantalInWachtrij-1); //TODO: klopt dit??
+        if (bestelFacade.getKeukenBestellingen().size() == 0) {
+            keukenView.showAlert("Gaat niet!", "Er zitten geen bestellingen in de wachtrij.");
+        } else {
+            //TODO: Indien men klikt op de “Volgende bestelling” knop wordt de eerst toegevoegde bestelling uit de wachtrij verwijderd en getoond.
+            bestelFacade.getKeukenBestellingen().remove(0);
+            keukenView.updateBestellijnen(this);
+            bestelFacade.updateBy(BestellingEvents.VERWIJDER_BROODJE, 0,0, aantalInWachtrij-1); //TODO: klopt dit??
+        }
     }
 
     public void afgewerktKnopPressed() {
         //TODO: ??
-        bestelFacade.updateBy(BestellingEvents.AFGEWERKT, 0,0, aantalInWachtrij);
+        if ( bestelFacade.getKeukenBestellingen().size() > 0 ) {
+            keukenView.showAlert("Gaat niet!", "Er zitten nog bestellingen in de wachtrij.");
+        } else {
+            bestelFacade.updateBy(BestellingEvents.AFGEWERKT, 0, 0, aantalInWachtrij);
+        }
     }
     public ArrayList<Bestellijn> getLijstBestellijnen(){
         return bestelFacade.getLijstBestellijnen();

@@ -5,10 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -28,6 +25,8 @@ public class KeukenView {
     private Label volgnr = new Label("Volgnummer bestelling: 0");
     private Label streepje = new Label("–");
     private Label aantal_broodjes = new Label("Aantal Broodjes: 0");
+    private Button afgewerktKnop;
+    private Button volgendeKnop;
     private TableView bestellijnen;
     private ObservableList<Bestellijn> observableListBestellijnen;
 
@@ -56,13 +55,12 @@ public class KeukenView {
         HBox buttonBox = new HBox(8);
 
         //TODO: Deze knoppen zijn alleen actief als er nog bestellingen in de wachtrij zitten.
-        Button volgendeKnop = new Button("Volgende bestelling");
+        volgendeKnop = new Button("Volgende bestelling");
         volgendeKnop.setOnAction(event -> controller.volgendeKnopPressed());
-        volgendeKnop.setDisable(false);
-        Button afgewerktKnop = new Button("Bestelling afgewerkt");
+        volgendeKnop.setDisable(true);
+        afgewerktKnop = new Button("Bestelling afgewerkt");
         afgewerktKnop.setOnAction(event -> controller.afgewerktKnopPressed());
         afgewerktKnop.setDisable(true);
-
         buttonBox.getChildren().addAll(volgendeKnop);
         buttonBox.getChildren().addAll(afgewerktKnop);
 
@@ -102,5 +100,22 @@ public class KeukenView {
 
     public void setLabelAantalBroodjes(String s){
         aantal_broodjes.setText(s);
+    }
+
+    public void showAlert(String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning Dialog");
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+
+        alert.showAndWait();
+    }
+
+    public void enableAfgewerktKnop(boolean status) {
+        this.afgewerktKnop.setDisable(status);
+    }
+
+    public void enableVolgendeKnop(boolean status) {
+        this.volgendeKnop.setDisable(status);
     }
 }
