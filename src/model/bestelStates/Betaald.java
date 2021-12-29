@@ -1,4 +1,4 @@
-package model.state;
+package model.bestelStates;
 
 import model.*;
 

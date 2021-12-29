@@ -1,8 +1,8 @@
-package model.state;
+package model.bestelStates;
 
 import model.*;
-import model.state.kortingStrategies.KortingStrategyEnum;
-import model.state.kortingStrategies.KortingStrategyFactory;
+import model.kortingStrategies.KortingStrategyEnum;
+import model.kortingStrategies.KortingStrategyFactory;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -35,7 +35,11 @@ public class InBestelling implements BestellingState {
 
     @Override
     public void voegIdentiekBroodjeToe(Bestellijn bestellijn) {
-        bestelling.getBestellijnen().add(bestellijn);
+        Bestellijn bestellijnCopy = new Bestellijn(bestellijn.getBroodje());
+        for (BelegSoort belegSoort:bestellijn.getBelegSoort()) {
+            bestellijnCopy.voegBelegToe(belegSoort);
+        }
+        bestelling.getBestellijnen().add(bestellijnCopy);
     }
 
     @Override

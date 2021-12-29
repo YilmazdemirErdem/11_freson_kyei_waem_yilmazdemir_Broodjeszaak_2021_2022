@@ -73,20 +73,29 @@ public class BestelViewController implements Observer {
     }
 
     public void voegZelfdeBroodjeToeButtonPressed() {
+        Boolean toegestaan = true;
         Bestellijn bestellijn = bestelView.getSelectedBestellijn();
         if(bestellijn == null){
             bestelView.foutMelding("Onbestaande bestellijn", "Je kan geen bestellijn kopiëren of toevoegen zonder een bestellijn geselecteerd te hebben!");
+            toegestaan = false;
         }
         if (bestellijn.getBroodje().getBroodjesStock() <= 0){
             bestelView.foutMelding("Broodje niet voorraad op", "Het broodje dat je wilt toevoegen is niet meer op voorrraad");
+            toegestaan = false;
         }
-        for (BelegSoort belegSoort : bestellijn.getBelegSoort())
-            if (belegSoort.getBelegStock() <= 0){
-                bestelView.foutMelding("Beleg niet voorraad op", "Er is beleg op het broodje dat je wilt toevoegen dat niet meer op voorrraad");
+        if (bestellijn.getBelegSoort().size() != 0) {
+            for (BelegSoort belegSoort : bestellijn.getBelegSoort()){
+                if (belegSoort.getBelegStock() <= 0) {
+                    bestelView.foutMelding("Beleg niet voorraad op", "Er is beleg op het broodje dat je wilt toevoegen dat niet meer op voorrraad");
+                    toegestaan = false;
+                }
             }
-        else{
+        }
+        if (toegestaan){
             bestelFacade.voegZelfdeToe(bestellijn);
             bestelView.updateBestelijnen(this);
+            bestelView.updateBroodjesStatusKnoppen(this);
+            bestelView.updateBelegStatusKnoppen(this);
             bestelFacade.updateBy(BestellingEvents.TOEVOEGEN_IDENTIEK_BROODJE, 0, 1, 0);
         }
     }
@@ -107,7 +116,8 @@ public class BestelViewController implements Observer {
     public void annuleerBestelling() {
         bestelFacade.annuleerBestelling();
         bestelView.updateBestelijnen(this);
-        bestelFacade.updateBy(BestellingEvents.ANNULEREN, 0,0,0);
+        int aantalBroodjes = bestelView.getAantalBroodjes();
+        bestelFacade.updateBy(BestellingEvents.ANNULEREN, 0, -aantalBroodjes,0);
         bestelView.updateStatusInWachtKnoppen(false);
     }
 

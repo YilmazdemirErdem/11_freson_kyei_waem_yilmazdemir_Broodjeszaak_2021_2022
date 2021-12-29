@@ -57,16 +57,12 @@ public class BestelFacade implements Subject {
     }
 
     public void voegZelfdeToe(Bestellijn bestellijn) {
-        Broodje broodjeOriginal = bestellijn.getBroodje();
-        Broodje broodje = new Broodje(broodjeOriginal.getBroodjesNaam(), broodjeOriginal.getBroodjesPrijs(),
+       /* Broodje broodjeOriginal = bestellijn.getBroodje();
+        broodjeOriginal.aanpassenVoorraad(-1);*/
+        /*Broodje broodje = new Broodje(broodjeOriginal.getBroodjesNaam(), broodjeOriginal.getBroodjesPrijs(),
                 broodjeOriginal.getBroodjesStock(), broodjeOriginal.getAantalBroodjesVerkocht());
-        Bestellijn bestellijnCopy = new Bestellijn(broodje);
-
-        for (BelegSoort belegSoort:bestellijn.getBelegSoort()) {
-            bestellijnCopy.voegBelegToe(belegSoort);
-        }
-
-        bestelling.voegDezelfdeBestellijnToe(bestellijnCopy);
+        Bestellijn bestellijnCopy = new Bestellijn(broodje);*/
+        bestelling.voegDezelfdeBestellijnToe(bestellijn);
     }
 
     public void verwijderBestellijn(Bestellijn bestellijn) {

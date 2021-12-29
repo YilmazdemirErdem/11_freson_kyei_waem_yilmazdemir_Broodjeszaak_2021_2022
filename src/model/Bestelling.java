@@ -1,6 +1,6 @@
 package model;
 
-import model.state.*;
+import model.bestelStates.*;
 
 import java.util.ArrayList;
 

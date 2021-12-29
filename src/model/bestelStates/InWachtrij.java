@@ -1,11 +1,11 @@
-package model.state;
+package model.bestelStates;
 
 import model.*;
 
-public class Afgesloten implements BestellingState {
+public class InWachtrij implements BestellingState {
     private Bestelling bestelling;
 
-    public Afgesloten(Bestelling bestelling) {
+    public InWachtrij(Bestelling bestelling) {
         this.bestelling = bestelling;
     }
 
@@ -41,24 +41,17 @@ public class Afgesloten implements BestellingState {
 
     @Override
     public void annuleren(Bestelling bestelling) {
-        for (Bestellijn bestellijn: bestelling.getBestellijnen()) {
-            bestellijn.getBroodje().aanpassenVoorraad(1);
-            for (BelegSoort belegSoort: bestellijn.getBelegSoort()){
-                belegSoort.aanpassenVoorraad(1);
-            }
-        }
-        bestelling.getBestellijnen().clear();
-        this.bestelling.setState(this.bestelling.getInWacht());
+        throw new IllegalArgumentException("you can't do this function");
     }
 
     @Override
     public void betalen() {
-        bestelling.setState(bestelling.getBetaald());
+        throw new IllegalArgumentException("you can't do this function");
     }
 
     @Override
     public void startBereiding() {
-        throw new IllegalArgumentException("you can't do this function");
+        bestelling.setState(bestelling.getInBereiding());
     }
 
     @Override

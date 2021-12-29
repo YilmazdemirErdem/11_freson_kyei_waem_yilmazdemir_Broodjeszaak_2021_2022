@@ -1,4 +1,4 @@
-package model.state.kortingStrategies;
+package model.kortingStrategies;
 
 public enum KortingStrategyEnum {
     TIEN_PROCENT_OP_GANSE_BESTELLING("10% korting op ganse bestelling"),

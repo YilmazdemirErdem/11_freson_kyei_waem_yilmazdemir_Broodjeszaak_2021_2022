@@ -14,14 +14,9 @@ import javafx.stage.StageStyle;
 import model.BelegSoort;
 import model.Bestellijn;
 import model.Broodje;
-import model.database.BroodjesDatabase;
-import model.state.BestellingState;
-import model.state.InBestelling;
-import model.state.kortingStrategies.KortingStrategyEnum;
 
-import java.sql.SQLOutput;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 
 public class BestelView {
@@ -263,6 +258,12 @@ public class BestelView {
 
     public String getkortingsStrategie() {
         return kortingKeuze.getValue();
+    }
+
+    public int getAantalBroodjes(){
+        int aantalBroodjes = 0;
+        aantalBroodjes = Integer.parseInt((String) Array.get(aantal_broodjes.getText().split(" "), 2));
+        return aantalBroodjes;
     }
 
     public void foutMelding(String header, String content){
