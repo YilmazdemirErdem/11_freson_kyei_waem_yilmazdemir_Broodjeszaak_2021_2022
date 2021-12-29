@@ -139,7 +139,7 @@ public class BestelViewController implements Observer {
 
     public void zendNaarKeukenBestelling(ObservableList items) {
         bestelFacade.zendNaarKeuken(items);
-        bestelFacade.updateBy(BestellingEvents.NAAR_KEUKEN, 0,0, 1);
+        bestelFacade.updateBy(BestellingEvents.NAAR_KEUKEN, 0,-bestelView.getAantalBroodjes(), 1);
         bestelView.updateStatusInWachtKnoppen(false);
     }
 

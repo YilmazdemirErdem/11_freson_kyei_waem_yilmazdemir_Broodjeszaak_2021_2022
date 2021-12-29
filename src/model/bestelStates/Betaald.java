@@ -67,7 +67,7 @@ public class Betaald implements BestellingState {
     public void naar_keuken(ArrayList<Bestelling> wachtrij, Bestelling bestelling, BroodjesDatabase broodjesDatabase) {
         bestelling.setState(bestelling.getInWachtrij());
         wachtrij.add(bestelling);
-        broodjesDatabase.save(LoadSaveStrategyEnum.TEKST);
+        /*broodjesDatabase.save(LoadSaveStrategyEnum.TEKST);*/
     }
 
     @Override

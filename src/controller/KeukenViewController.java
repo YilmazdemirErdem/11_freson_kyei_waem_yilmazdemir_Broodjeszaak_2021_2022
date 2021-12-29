@@ -39,7 +39,6 @@ public class KeukenViewController implements Observer {
     //called by model
     @Override
     public void update(int nrBestelling, int aantalBroodjes, double totalePrijs, int aantalBestellingenInWachtrij) {
-        System.out.println("aantalBestellingenInWachtrij: " + aantalBestellingenInWachtrij);
         aantalInWachtrij = aantalBestellingenInWachtrij;
         keukenView.setLabelAantalBestellingenInWachtrij("Aantal bestellingen in de wachtrij: " + aantalBestellingenInWachtrij);
         keukenView.setLabelAantalBroodjes("Aantal broodjes: " + aantalBroodjes);
