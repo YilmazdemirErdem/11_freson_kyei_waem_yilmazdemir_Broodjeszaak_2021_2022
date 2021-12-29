@@ -14,7 +14,7 @@ import model.Broodje;
 import model.database.BroodjesDatabase;
 
 /**
- * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
  */
 
 public class BroodjesPane extends GridPane {

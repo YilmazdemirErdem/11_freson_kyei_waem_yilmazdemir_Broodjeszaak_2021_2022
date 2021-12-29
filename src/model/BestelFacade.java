@@ -9,6 +9,10 @@ import utilities.Observer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
+ */
+
 public class BestelFacade implements Subject {
     private int nr_bestelling = 0;
     private int aantal_broodjes = 0;
@@ -65,11 +69,6 @@ public class BestelFacade implements Subject {
     }
 
     public void voegZelfdeToe(Bestellijn bestellijn) {
-       /* Broodje broodjeOriginal = bestellijn.getBroodje();
-        broodjeOriginal.aanpassenVoorraad(-1);*/
-        /*Broodje broodje = new Broodje(broodjeOriginal.getBroodjesNaam(), broodjeOriginal.getBroodjesPrijs(),
-                broodjeOriginal.getBroodjesStock(), broodjeOriginal.getAantalBroodjesVerkocht());
-        Bestellijn bestellijnCopy = new Bestellijn(broodje);*/
         bestelling.voegDezelfdeBestellijnToe(bestellijn);
     }
 

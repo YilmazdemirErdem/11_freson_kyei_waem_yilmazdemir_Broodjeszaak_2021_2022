@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
  */
 
 public class BroodjesDatabase {

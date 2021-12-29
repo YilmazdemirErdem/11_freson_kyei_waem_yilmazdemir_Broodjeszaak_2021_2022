@@ -7,6 +7,10 @@ import view.KeukenView;
 
 import java.util.ArrayList;
 
+/**
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
+ */
+
 public class KeukenViewController implements Observer {
     private KeukenView keukenView;
     private BestelFacade bestelFacade;

@@ -18,6 +18,9 @@ import model.Broodje;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+/**
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
+ */
 
 public class BestelView {
     private Stage stage = new Stage();
@@ -81,22 +84,10 @@ public class BestelView {
         HBox two_one = new HBox(8);
         listBroodjes = new ListView();
         two_one.getChildren().addAll(listBroodjes);
-        /*ObservableList<Broodje> voorraadBroodjes = listBroodjes.getItems();
-        for (Broodje broodje: voorraadBroodjes) { //iteren over observableList van broodjes, iets fout met opstart daarna zou het moeten werken
-            System.out.println(broodje.getBroodjesNaam());
-            Button button = new Button(broodje.getBroodjesNaam());
-            listBroodjes.getItems().add(button);
-            button.setOnAction(event -> controller.broodjeButtonPressed(broodje));
-        }*/
 
         HBox two_two = new HBox(8);
         listBeleg = new ListView();
         two_two.getChildren().addAll(listBeleg);
-        /*for (BelegSoort belegSoort: controller.getOpVoorraadLijstBelegSoorten()) { //iteren over observableList van belegsoorten
-            Button button = new Button(belegSoort.getBelegNaam());
-            two_two.getChildren().addAll(button);
-            button.setOnAction(event -> controller.belegButtonPressed(belegSoort));
-        }*/
 
         VBox two = new VBox(8);
         two.setPadding(new Insets(10));
@@ -176,7 +167,7 @@ public class BestelView {
     public void updateBroodjesStatusKnoppen(BestelViewController controller){
         observableListBroodjes = FXCollections.observableArrayList(controller.getOpVoorraadLijstBroodjes());
         listBroodjes.getItems().clear();
-        for (Broodje broodje: observableListBroodjes) { //iteren over observableList van broodjes, iets fout met opstart daarna zou het moeten werken
+        for (Broodje broodje: observableListBroodjes) {
             Button button = new Button(broodje.getBroodjesNaam());
             listBroodjes.getItems().add(button);
             button.setOnAction(event -> controller.broodjeButtonPressed(broodje));
@@ -187,7 +178,7 @@ public class BestelView {
     public void updateBelegStatusKnoppen(BestelViewController controller){
         observableListBeleg = FXCollections.observableArrayList(controller.getOpVoorraadLijstBelegSoorten());
         listBeleg.getItems().clear();
-        for (BelegSoort belegSoort: observableListBeleg) { //iteren over observableList van broodjes, iets fout met opstart daarna zou het moeten werken
+        for (BelegSoort belegSoort: observableListBeleg) {
             Button button = new Button(belegSoort.getBelegNaam());
             listBeleg.getItems().add(button);
             button.setOnAction(event -> controller.belegButtonPressed(belegSoort));
@@ -196,7 +187,6 @@ public class BestelView {
     }
 
     public void updateStatusInWachtKnoppen(Boolean status){
-        // broodjes, beleg, verwijder, dezelfde, annuleer, afsluiten knoppen
         listBroodjes.setDisable(!status);
         listBeleg.setDisable(!status);
         nieuwe_bestelling_button.setDisable(status);
@@ -210,7 +200,6 @@ public class BestelView {
     }
 
     public void updateStatusInBestellingKnoppen(Boolean status){
-        // broodjes, beleg, verwijder, dezelfde, annuleer, afsluiten knoppen
         listBroodjes.setDisable(status);
         listBeleg.setDisable(status);
         nieuwe_bestelling_button.setDisable(!status);
@@ -224,7 +213,6 @@ public class BestelView {
     }
 
     public void updateStatusInAfgeslotenKnoppen(Boolean status){
-        // broodjes, beleg, verwijder, dezelfde, annuleer, afsluiten knoppen
         listBroodjes.setDisable(!status);
         listBeleg.setDisable(!status);
         nieuwe_bestelling_button.setDisable(!status);
@@ -238,7 +226,6 @@ public class BestelView {
     };
 
     public void updateStatusInBetaaldKnoppen(Boolean status){
-        // broodjes, beleg, verwijder, dezelfde, annuleer, afsluiten knoppen
         listBroodjes.setDisable(!status);
         listBeleg.setDisable(!status);
         nieuwe_bestelling_button.setDisable(!status);

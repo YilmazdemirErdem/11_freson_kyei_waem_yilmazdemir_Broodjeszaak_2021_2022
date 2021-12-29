@@ -8,6 +8,10 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 
+/**
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
+ */
+
 public class InBestelling implements BestellingState {
     private Bestelling bestelling;
 

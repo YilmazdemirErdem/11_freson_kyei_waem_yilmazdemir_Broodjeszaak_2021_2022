@@ -3,6 +3,10 @@ package model.database.loadSaveStrategies;
 import model.Broodje;
 import utilities.TekstLoadSaveTemplate;
 
+/**
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
+ */
+
 public class BroodjesTekstLoadSaveStrategy extends TekstLoadSaveTemplate implements LoadSaveStrategy {
 
     public BroodjesTekstLoadSaveStrategy() {}

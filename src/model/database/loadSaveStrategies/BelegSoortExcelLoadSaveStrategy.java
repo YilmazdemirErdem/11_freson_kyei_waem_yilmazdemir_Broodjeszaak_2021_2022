@@ -6,6 +6,10 @@ import utilities.ExcelLoadSaveTemplate;
 
 import java.util.ArrayList;
 
+/**
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
+ */
+
 public class BelegSoortExcelLoadSaveStrategy extends ExcelLoadSaveTemplate implements LoadSaveStrategy {
 
     public BelegSoortExcelLoadSaveStrategy() {}

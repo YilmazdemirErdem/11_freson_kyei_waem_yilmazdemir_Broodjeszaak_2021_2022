@@ -12,6 +12,10 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.TreeMap;
 
+/**
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
+ */
+
 public class BelegDatabase {
     private TreeMap belegMap;
 

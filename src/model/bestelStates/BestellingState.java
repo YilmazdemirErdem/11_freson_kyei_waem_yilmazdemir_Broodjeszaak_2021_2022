@@ -7,6 +7,10 @@ import model.Broodje;
 
 import java.util.ArrayList;
 
+/**
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
+ */
+
 public interface BestellingState {
 
     void maakNieuweBestelling(Bestelling bestelling);

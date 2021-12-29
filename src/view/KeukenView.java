@@ -18,6 +18,10 @@ import model.Bestelling;
 
 import java.util.ArrayList;
 
+/**
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
+ */
+
 public class KeukenView {
 
     private Stage stage = new Stage();

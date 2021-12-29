@@ -4,6 +4,10 @@ import model.Bestellijn;
 
 import java.util.ArrayList;
 
+/**
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
+ */
+
 public class TienProcentKortingOpGanseBestellingKortingStrategy implements KortingStrategy {
 
     public TienProcentKortingOpGanseBestellingKortingStrategy() {

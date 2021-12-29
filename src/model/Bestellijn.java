@@ -3,6 +3,10 @@ package model;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
+ */
+
 public class Bestellijn {
     private String naamBroodje;
     private ArrayList<String> namenBeleg;

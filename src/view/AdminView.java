@@ -8,6 +8,10 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
+/**
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
+ */
+
 public class AdminView {
     private Stage stage = new Stage();
 

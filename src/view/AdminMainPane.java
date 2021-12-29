@@ -11,7 +11,7 @@ import view.panels.AdminInstellingenPane;
 import view.panels.BroodjesBelegOverviewPane;
 
 /**
- * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
  */
 
 public class AdminMainPane extends BorderPane {

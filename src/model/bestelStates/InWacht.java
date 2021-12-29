@@ -4,6 +4,10 @@ import model.*;
 
 import java.util.ArrayList;
 
+/**
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
+ */
+
 public class InWacht implements BestellingState {
     private Bestelling bestelling;
 

@@ -15,6 +15,10 @@ import model.Broodje;
 import model.database.BelegDatabase;
 import model.database.BroodjesDatabase;
 
+/**
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
+ */
+
 public class KitchenPane extends BorderPane {
     private TableView<Broodje> table;
     private ObservableList<Broodje> broodjes;

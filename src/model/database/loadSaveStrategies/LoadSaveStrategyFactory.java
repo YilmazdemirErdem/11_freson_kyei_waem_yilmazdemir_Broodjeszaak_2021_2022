@@ -1,5 +1,9 @@
 package model.database.loadSaveStrategies;
 
+/**
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
+ */
+
 public class LoadSaveStrategyFactory {
 
     private static LoadSaveStrategyFactory instance = new LoadSaveStrategyFactory();

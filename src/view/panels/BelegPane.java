@@ -13,6 +13,10 @@ import javafx.scene.text.Font;
 import model.BelegSoort;
 import model.database.BelegDatabase;
 
+/**
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
+ */
+
 public class BelegPane extends GridPane {
     private TableView<BelegSoort> table;
     private ObservableList<BelegSoort> belegsoorten;

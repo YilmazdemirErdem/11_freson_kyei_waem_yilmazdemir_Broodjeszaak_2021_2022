@@ -5,6 +5,10 @@ import model.BestellingEvents;
 import utilities.Observer;
 import view.panels.BroodjesBelegOverviewPane;
 
+/**
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
+ */
+
 public class BroodjesViewController implements Observer {
 
     private BroodjesBelegOverviewPane broodjesBelegOverviewPane;

@@ -1,5 +1,9 @@
 package model.kortingStrategies;
 
+/**
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
+ */
+
 public class KortingStrategyFactory {
 
     private static KortingStrategyFactory instance = new KortingStrategyFactory();

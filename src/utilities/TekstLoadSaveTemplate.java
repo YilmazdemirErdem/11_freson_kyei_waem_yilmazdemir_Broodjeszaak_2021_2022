@@ -4,6 +4,10 @@ import java.io.*;
 import java.util.Collection;
 import java.util.TreeMap;
 
+/**
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
+ */
+
 public abstract class TekstLoadSaveTemplate<K,V>{
 
     public TreeMap<K,V> load(File file) {

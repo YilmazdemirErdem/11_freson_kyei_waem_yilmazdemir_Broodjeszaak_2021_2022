@@ -3,6 +3,10 @@ package model.database.loadSaveStrategies;
 import model.BelegSoort;
 import utilities.TekstLoadSaveTemplate;
 
+/**
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
+ */
+
 public class BelegSoortTekstLoadSaveStrategy extends TekstLoadSaveTemplate implements LoadSaveStrategy {
 
     public BelegSoortTekstLoadSaveStrategy() {}

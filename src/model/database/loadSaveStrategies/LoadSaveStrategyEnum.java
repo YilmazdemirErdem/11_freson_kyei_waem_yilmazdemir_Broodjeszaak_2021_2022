@@ -1,5 +1,9 @@
 package model.database.loadSaveStrategies;
 
+/**
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
+ */
+
 public enum LoadSaveStrategyEnum {
 
     TEKST("tekst"), EXCEL("excel");

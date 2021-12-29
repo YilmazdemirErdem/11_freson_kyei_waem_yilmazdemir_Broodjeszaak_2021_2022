@@ -7,6 +7,10 @@ import view.BestelView;
 
 import java.util.ArrayList;
 
+/**
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
+ */
+
 public class BestelViewController implements Observer {
     private BestelView bestelView;
     private BestelFacade bestelFacade;

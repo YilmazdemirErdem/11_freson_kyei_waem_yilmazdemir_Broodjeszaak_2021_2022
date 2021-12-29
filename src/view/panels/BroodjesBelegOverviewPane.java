@@ -6,7 +6,7 @@ import model.database.BelegDatabase;
 import model.database.BroodjesDatabase;
 
 /**
- * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson
+ * @Author: Mattias Waem, Erdem Yilmazdemir, Yannic Freson, Dazzy Kyei
  */
 
 public class BroodjesBelegOverviewPane extends GridPane{
