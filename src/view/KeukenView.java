@@ -48,9 +48,8 @@ public class KeukenView {
         two.getChildren().addAll(streepje);
         two.getChildren().addAll(aantal_broodjes);
 
-        VBox main = new VBox(8);
-        main.setPadding(new Insets(10));
-        main.getChildren().addAll(one, two);
+
+        HBox buttonBox = new HBox(8);
 
         //TODO: Deze knoppen zijn alleen actief als er nog bestellingen in de wachtrij zitten.
         Button volgendeKnop = new Button("Volgende bestelling");
@@ -60,8 +59,10 @@ public class KeukenView {
         afgewerktKnop.setOnAction(event -> controller.afgewerktKnopPressed());
         afgewerktKnop.setDisable(true);
 
+        buttonBox.getChildren().addAll(volgendeKnop);
+        buttonBox.getChildren().addAll(afgewerktKnop);
         // dynamisch bestellijnen inladen
-        ArrayList<Bestellijn> bestellijnen = controller.getLijstBestellijnen(); // [a, b, b, c, b, c] => [a, b, c, b, c]
+        /*ArrayList<Bestellijn> bestellijnen = controller.getLijstBestellijnen(); // [a, b, b, c, b, c] => [a, b, c, b, c]
         for (Bestellijn bestellijn : bestellijnen) {
             for (Bestellijn compare : bestellijnen) {
                 if (bestellijn.getBroodje() == compare.getBroodje() && bestellijn.getNamenBeleg() == compare.getNamenBeleg()) {
@@ -69,9 +70,12 @@ public class KeukenView {
                     break;
                 }
             }
-        }
+        }*/
 
         //TODO ...
+        VBox main = new VBox(8);
+        main.setPadding(new Insets(10));
+        main.getChildren().addAll(one, two, buttonBox);
 
         return main;
     }

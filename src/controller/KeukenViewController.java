@@ -26,18 +26,6 @@ public class KeukenViewController implements Observer {
         this.bestelFacade = bestelFacade;
     }
 
-    public void volgendeKnopPressed() {
-        //TODO: Indien men klikt op de “Volgende bestelling” knop wordt de eerst toegevoegde bestelling uit de wachtrij verwijderd en getoond.
-        wachtrij.remove(0); //?? & tonen
-    }
-
-    public void afgewerktKnopPressed() {
-        //TODO: ??
-    }
-    public ArrayList<Bestellijn> getLijstBestellijnen(){
-        return bestelFacade.getLijstBestellijnen();
-    }
-
     //called by view
     public void setView(KeukenView view) {
         this.keukenView = view;
@@ -46,9 +34,21 @@ public class KeukenViewController implements Observer {
     //called by model
     @Override
     public void update(int nrBestelling, int aantalBroodjes, double totalePrijs, int aantalBestellingenInWachtrij) {
-        System.out.println(aantalBestellingenInWachtrij);
         keukenView.setLabelAantalBestellingenInWachtrij("Aantal bestellingen in de wachtrij: " + aantalBestellingenInWachtrij);
         keukenView.setLabelAantalBroodjes("Aantal broodjes: " + aantalBroodjes);
         keukenView.setLabelVolgnr("Volgnummer bestelling: " + nrBestelling);
+    }
+
+    public void volgendeKnopPressed() {
+        //TODO: Indien men klikt op de “Volgende bestelling” knop wordt de eerst toegevoegde bestelling uit de wachtrij verwijderd en getoond.
+        bestelFacade.getKeukenBestellingen();
+        wachtrij.remove(0); //?? & tonen
+    }
+
+    public void afgewerktKnopPressed() {
+        //TODO: ??
+    }
+    public ArrayList<Bestellijn> getLijstBestellijnen(){
+        return bestelFacade.getLijstBestellijnen();
     }
 }

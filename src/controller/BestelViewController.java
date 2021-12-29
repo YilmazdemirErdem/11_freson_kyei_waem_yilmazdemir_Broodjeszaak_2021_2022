@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.collections.ObservableList;
 import model.*;
 import utilities.Observer;
 import view.BestelView;
@@ -132,8 +133,8 @@ public class BestelViewController implements Observer {
         bestelView.updateStatusInBetaaldKnoppen(false);
     }
 
-    public void zendNaarKeukenBestelling() {
-        bestelFacade.zendNaarKeuken();
+    public void zendNaarKeukenBestelling(ObservableList items) {
+        bestelFacade.zendNaarKeuken(items);
         bestelFacade.updateBy(BestellingEvents.NAAR_KEUKEN, 0,0, 1);
         bestelView.updateStatusInWachtKnoppen(false);
     }
